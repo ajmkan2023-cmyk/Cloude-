@@ -1,0 +1,49 @@
+{
+  "cycle": 999,
+  "concept": "reasons",
+  "topic": "أجمكان",
+  "headline": "٥ أسباب\nتخليك تجي أجمكان",
+  "kicker": "لماذا أجمكان",
+  "subline": "على بحر الخبر — قريب منك أكثر مما تتخيّل",
+  "cta": "احجز جلستك الآن",
+  "style": "",
+  "design": {},
+  "design_note": "",
+  "shots": [
+    {
+      "photo": "assets/incoming/demo/shot1.jpg",
+      "title": "البحر قدّامك",
+      "body": "جلسة على الرمل والموج على مرمى خطوة",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/demo/shot2.jpg",
+      "title": "غروب كل يوم",
+      "body": "لون لا يتكرّر ولا يحتاج فلتر",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/demo/shot3.jpg",
+      "title": "قريب من المدينة",
+      "body": "دقائق من الخبر وأنت في عالم ثاني",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/demo/shot4.jpg",
+      "title": "أجواء عائلية",
+      "body": "مساحة تكفي اللمّة والضحك",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/demo/shot5.jpg",
+      "title": "هدوء تستحقه",
+      "body": "بعيد عن الزحام، قريب من نفسك",
+      "move": ""
+    }
+  ],
+  "caption": "٥ أسباب تخليك تختار أجمكان على بحر الخبر 🌴\nللحجز والاستفسار: 0535516054",
+  "hashtags": "#أجمكان #الخبر #المنطقة_الشرقية #الدمام #شاطئ #البحر #وجهات_الشرقية #اكتشف_الخبر",
+  "hero_photo": "assets/incoming/demo/hero.jpg",
+  "audio": "",
+  "created": "2026-08-17"
+}

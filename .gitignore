@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+out/
+assets/incoming/*
+!assets/incoming/.gitkeep
+assets/audio/*
+!assets/audio/.gitkeep
+.venv/
+scratch/
