@@ -16,13 +16,15 @@ class Concept:
     key: str
     name_ar: str
     kicker: str
+    # ⚠ قالب استرشادي لا نصّ نهائي: يبيّن *شكل* العنوان فقط، وعلى المهارة أن
+    # تكتب عنوانًا جديدًا كل دورة. تسليم القالب كما هو يُرصد في `history.py`.
     headline_template: str        # {n} عدد اللقطات، {topic} زاوية الحلقة
     scene_count: int
     title_scene_seconds: float
     photo_scene_seconds: float
     outro_seconds: float
     moves: tuple[str, ...]
-    caption_opener: str
+    caption_opener: str           # استرشادي كذلك — تُعاد صياغته كل دورة
     hashtags: tuple[str, ...]
     guidance: str                 # توجيه لكلود عند كتابة النصوص
     topic_hint: str = ""          # اقتراح لزاوية الحلقة

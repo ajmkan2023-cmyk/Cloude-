@@ -106,10 +106,15 @@ class Plan:
 
     def review(self) -> list[str]:
         """ملاحظات لا تمنع الإخراج لكن يُستحسن مراجعتها."""
+        from .history import History
+
+        notes: list[str] = History.load().echoes(self)
+
         catalog = Catalog.load()
         if not catalog.entries:
-            return ["لا يوجد فهرس صور — شغّل خطوة الفهرسة أولًا لضمان تطابق النص مع الصور"]
-        notes: list[str] = []
+            notes.append("لا يوجد فهرس صور — شغّل خطوة الفهرسة أولًا لضمان تطابق النص مع الصور")
+            return notes
+
         notes += [
             f"صورة الافتتاح: {w}"
             for w in catalog.check_text(self.hero_photo, self.headline, self.subline)

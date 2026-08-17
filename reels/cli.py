@@ -119,8 +119,20 @@ def cmd_demo() -> None:
     cmd_build("plans/cycle-999.json")
 
 
+def cmd_record(path: str) -> None:
+    """يسجّل الحلقة في السجلّ بعد اعتمادها — لتتجنّبها الدورات القادمة."""
+    from .history import History
+
+    plan = Plan.load(path)
+    history = History.load()
+    history.record(plan)
+    out = history.save()
+    print(f"✔ سُجّلت الدورة {plan.cycle} في {out} ({len(history.cycles)} حلقة في السجلّ)")
+
+
 COMMANDS = {
     "check": cmd_check,
+    "record": cmd_record,
     "build": cmd_build,
     "preview": cmd_preview,
     "scaffold": cmd_scaffold,
