@@ -52,7 +52,19 @@ def cmd_build(path: str, out: str | None = None) -> None:
     stem = Path(path).stem
     out_path = Path(out) if out else Path("out") / f"{stem}.mp4"
     timeline = build_timeline(plan)
-    render(timeline, out_path, audio=plan.audio or None)
+
+    audio = plan.audio or None
+    if plan.music_mood:
+        # المقطع يُولَّد بطول الخط الزمني بالضبط، فيبدأ تلاشيه مع آخر إطار
+        from .music import MOODS, write_track
+
+        timeline.prepare()
+        audio = write_track(out_path.with_name(f"{stem}-music.m4a"),
+                            timeline.duration, plan.music_mood)
+        print(f"♪ موسيقى «{MOODS[plan.music_mood]['name_ar']}» "
+              f"بطول {timeline.duration:.1f} ثانية: {audio}")
+
+    render(timeline, out_path, audio=audio)
     render_poster(timeline, out_path.with_suffix(".jpg"), at=plan.concept_obj.title_scene_seconds * 0.75)
     caption_file = out_path.with_suffix(".txt")
     caption_file.write_text(plan.full_caption(), encoding="utf-8")
