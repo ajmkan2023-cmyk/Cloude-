@@ -8,3 +8,6 @@ assets/audio/*
 .venv/
 scratch/
 assets/incoming/drive/
+
+# فيديوهات منشورة — تُرفع عمدًا ليكون لها رابط مباشر
+!media/
