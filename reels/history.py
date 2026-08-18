@@ -92,6 +92,8 @@ class History:
         recent = sorted(past, key=lambda c: c.get("cycle", 0))[-3:]
         if any(c.get("concept") == plan.concept for c in recent):
             found.append(f"الفكرة «{plan.concept}» استُخدمت في آخر ٣ دورات")
+        if plan.music_mood and any(c.get("music_mood") == plan.music_mood for c in recent):
+            found.append(f"مزاج الموسيقى «{plan.music_mood}» استُخدم في آخر ٣ دورات")
 
         found += self._design_echoes(plan, past)
         return list(dict.fromkeys(found))
@@ -140,6 +142,7 @@ class History:
             "photos": [Path(s.photo).name for s in plan.shots]
             + ([Path(plan.hero_photo).name] if plan.hero_photo else []),
             "design": self._design_signature(plan),
+            "music_mood": plan.music_mood,
             "design_note": plan.design_note,
             "created": plan.created,
         }
