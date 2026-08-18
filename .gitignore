@@ -7,3 +7,4 @@ assets/audio/*
 !assets/audio/.gitkeep
 .venv/
 scratch/
+assets/incoming/drive/

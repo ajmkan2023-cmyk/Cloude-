@@ -90,18 +90,22 @@ class Plan:
         if self.hero_photo and not Path(self.hero_photo).exists():
             problems.append(f"صورة الافتتاح غير موجودة — {self.hero_photo}")
 
-        # التناقض بين النص والصورة خطأ لا تحذير
+        # الصورة غير المفهرسة خطأ: بلا فهرس لا سبيل للتأكّد أن النص يصفها
         catalog = Catalog.load()
-        if catalog.entries:
-            problems += [
-                f"صورة الافتتاح: {w}"
-                for w in catalog.hard_conflicts(self.hero_photo, self.headline, self.subline)
-            ]
-            for i, shot in enumerate(self.shots, 1):
-                problems += [
-                    f"اللقطة {i}: {w}"
-                    for w in catalog.hard_conflicts(shot.photo, shot.title, shot.body)
-                ]
+        checks = [("صورة الافتتاح", self.hero_photo, (self.headline, self.subline))]
+        checks += [
+            (f"اللقطة {i}", shot.photo, (shot.title, shot.body))
+            for i, shot in enumerate(self.shots, 1)
+        ]
+        for label, photo, texts in checks:
+            if not photo:
+                continue
+            if catalog.for_photo(photo) is None:
+                problems.append(
+                    f"{label}: «{Path(photo).name}» غير مفهرسة — افهرسها قبل كتابة نص يصفها"
+                )
+                continue
+            problems += [f"{label}: {w}" for w in catalog.hard_conflicts(photo, *texts)]
         return problems
 
     def review(self) -> list[str]:

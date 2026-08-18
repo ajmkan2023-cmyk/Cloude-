@@ -12,32 +12,32 @@
   "shots": [
     {
       "photo": "assets/incoming/demo/shot1.jpg",
-      "title": "البحر قدّامك",
-      "body": "جلسة على الرمل والموج على مرمى خطوة",
+      "title": "ظلّ ونخيل",
+      "body": "سماء مفتوحة وهدوء يمتدّ",
       "move": ""
     },
     {
       "photo": "assets/incoming/demo/shot2.jpg",
-      "title": "غروب كل يوم",
-      "body": "لون لا يتكرّر ولا يحتاج فلتر",
+      "title": "سماء الليل",
+      "body": "نجوم أقرب مما تتخيّل",
       "move": ""
     },
     {
       "photo": "assets/incoming/demo/shot3.jpg",
-      "title": "قريب من المدينة",
-      "body": "دقائق من الخبر وأنت في عالم ثاني",
+      "title": "زُرقة تمتدّ",
+      "body": "ماء صافٍ وأفق بلا نهاية",
       "move": ""
     },
     {
       "photo": "assets/incoming/demo/shot4.jpg",
-      "title": "أجواء عائلية",
-      "body": "مساحة تكفي اللمّة والضحك",
+      "title": "ضوء ذهبي",
+      "body": "لون لا يتكرّر ولا يحتاج فلتر",
       "move": ""
     },
     {
       "photo": "assets/incoming/demo/shot5.jpg",
-      "title": "هدوء تستحقه",
-      "body": "بعيد عن الزحام، قريب من نفسك",
+      "title": "خليج هادئ",
+      "body": "شاطئ يبدأ حيث ينتهي الزحام",
       "move": ""
     }
   ],
@@ -45,5 +45,5 @@
   "hashtags": "#أجمكان #الخبر #المنطقة_الشرقية #الدمام #شاطئ #البحر #وجهات_الشرقية #اكتشف_الخبر",
   "hero_photo": "assets/incoming/demo/hero.jpg",
   "audio": "",
-  "created": "2026-08-17"
+  "created": "2026-08-18"
 }

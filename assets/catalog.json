@@ -1,0 +1,79 @@
+{
+  "hero.jpg": {
+    "path": "assets/incoming/demo/hero.jpg",
+    "tags": [
+      "غروب",
+      "سماء",
+      "نخيل"
+    ],
+    "description": "أفق عند الغروب مع نخيل في المقدّمة",
+    "people": false,
+    "time": "غروب",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "shot1.jpg": {
+    "path": "assets/incoming/demo/shot1.jpg",
+    "tags": [
+      "سماء",
+      "نخيل",
+      "طبيعة"
+    ],
+    "description": "كثبان فاتحة تحت سماء نهارية",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "shot2.jpg": {
+    "path": "assets/incoming/demo/shot2.jpg",
+    "tags": [
+      "ليل",
+      "سماء"
+    ],
+    "description": "سماء ليلية مرصّعة بالنجوم",
+    "people": false,
+    "time": "ليل",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "shot3.jpg": {
+    "path": "assets/incoming/demo/shot3.jpg",
+    "tags": [
+      "بحر",
+      "سماء",
+      "نخيل"
+    ],
+    "description": "مياه زرقاء وأفق مفتوح",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "shot4.jpg": {
+    "path": "assets/incoming/demo/shot4.jpg",
+    "tags": [
+      "غروب",
+      "سماء",
+      "نخيل"
+    ],
+    "description": "ضوء ذهبي منخفض قبيل المغيب",
+    "people": false,
+    "time": "غروب",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "shot5.jpg": {
+    "path": "assets/incoming/demo/shot5.jpg",
+    "tags": [
+      "بحر",
+      "شاطئ",
+      "سماء"
+    ],
+    "description": "خليج هادئ عند خط الشاطئ",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  }
+}

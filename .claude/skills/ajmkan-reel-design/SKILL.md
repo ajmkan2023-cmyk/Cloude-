@@ -43,16 +43,30 @@ description: >
 
 مجلّد درايف: **TikTok Content** — `1SRGnQImHKDtJqUXEc44ev4c_1HbTtlxc`.
 
-لكل صورة غير موجودة في `assets/catalog.json`:
+**مهم:** `read_file_content` لا يصف الصور — يستخرج النصوص فقط ويعيد فراغًا
+للصور الفوتوغرافية. والأصول (٤–١٠ ميجابايت) أكبر من أن تُنقل إلى الجلسة.
+لذلك الفهرسة تمرّ عبر مجلّد **`_previews`** بداخله نسخ مصغّرة (~٤٠ كيلوبايت)
+يولّدها `scripts/make_previews.py`.
 
-1. `mcp__Google_Drive__search_files` لسرد الملفات الجديدة.
-2. `mcp__Google_Drive__read_file_content` على كل صورة — يعيد وصفًا لغويًا
-   لمحتواها. **هذه هي عينك على الصورة، ولا يجوز تخمين المحتوى من اسم الملف.**
-3. سجّل في `assets/catalog.json` وفق البنية الموصوفة في `reels/catalog.py`:
-   `tags` من مفردات `TAG_VOCABULARY` فقط، مع `description` و`time` (صباح/نهار/
-   غروب/ليل) و`people` و`quality` و`vertical_ok`.
+لكل صورة في `_previews` غير موجودة في `assets/catalog.json`:
 
-كن صادقًا في الوسوم. وسم خاطئ هنا يُنتج حلقة تقول ما ليس في الصورة.
+1. `mcp__Google_Drive__download_file_content` على النسخة المصغّرة.
+2. فُكّ الترميز إلى ملف واطّلع عليه بأداة القراءة — **انظر إلى الصورة فعلًا**:
+
+   ```bash
+   printf '%s' "<base64>" | base64 -d > /tmp/preview.jpg
+   ```
+
+3. سجّل ما رأيته في `assets/catalog.json` وفق بنية `reels/catalog.py`:
+   `tags` من مفردات `TAG_VOCABULARY` فقط، مع `description` و`time`
+   (صباح/نهار/غروب/ليل) و`people` و`quality` و`vertical_ok`.
+
+**إن لم يوجد مجلّد `_previews`**: توقّف عند هذا الحدّ وأبلغ المستخدم أنه
+يحتاج تشغيل `scripts/make_previews.py` من Colab. لا تخمّن محتوى صورة من
+اسم ملفّها ولا تكتب نصًّا يصف صورة لم ترها — المحرّك يرفض أي صورة غير
+مفهرسة ويوقف الإخراج.
+
+الفهرس تراكمي: ما فُهرس مرّة لا يُعاد.
 
 ### ٣. اختر الزاوية
 

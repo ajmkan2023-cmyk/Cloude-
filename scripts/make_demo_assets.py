@@ -111,12 +111,40 @@ def make_image(index: int, path: Path) -> None:
     final.save(path, quality=92)
 
 
+# ما تحتويه كل صورة تجريبية فعلًا — يُكتب في الفهرس كما لو فهرسها كلود
+DEMO_INDEX = [
+    ("hero.jpg",  ["غروب", "سماء", "نخيل"], "أفق عند الغروب مع نخيل في المقدّمة", "غروب"),
+    ("shot1.jpg", ["سماء", "نخيل", "طبيعة"], "كثبان فاتحة تحت سماء نهارية", "نهار"),
+    ("shot2.jpg", ["ليل", "سماء"], "سماء ليلية مرصّعة بالنجوم", "ليل"),
+    ("shot3.jpg", ["بحر", "سماء", "نخيل"], "مياه زرقاء وأفق مفتوح", "نهار"),
+    ("shot4.jpg", ["غروب", "سماء", "نخيل"], "ضوء ذهبي منخفض قبيل المغيب", "غروب"),
+    ("shot5.jpg", ["بحر", "شاطئ", "سماء"], "خليج هادئ عند خط الشاطئ", "نهار"),
+]
+
+
+def write_catalog() -> None:
+    """يكتب فهرسًا للصور التجريبية — المحرّك يرفض أي صورة غير مفهرسة."""
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from reels.catalog import Catalog, Entry
+
+    catalog = Catalog.load()
+    for name, tags, description, time in DEMO_INDEX:
+        catalog.entries[name] = Entry(
+            path=str(OUT / name), tags=tags, description=description,
+            people=False, time=time, quality="جيدة", vertical_ok=True,
+        )
+    catalog.save()
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     make_image(0, OUT / "hero.jpg")
     for i in range(1, 6):
         make_image(i, OUT / f"shot{i}.jpg")
-    print(f"✔ صور تجريبية في {OUT}")
+    write_catalog()
+    print(f"✔ صور تجريبية في {OUT} (مع فهرس محتواها)")
 
 
 if __name__ == "__main__":
