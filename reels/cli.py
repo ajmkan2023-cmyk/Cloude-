@@ -85,6 +85,7 @@ def cmd_scaffold(cycle: str, concept_key: str | None = None, topic: str = "وج�
         ],
         caption=concept.caption_opener.format(n=concept.scene_count, topic=topic),
         hashtags=hashtag_line(concept),
+        audio="assets/audio/track.mp3" if Path("assets/audio/track.mp3").exists() else "",
         created=date.today().isoformat(),
     )
     path = plan.save(Path("plans") / f"cycle-{n:03d}.json")
