@@ -1,0 +1,73 @@
+{
+  "cycle": 1,
+  "concept": "tour",
+  "topic": "أجمكان",
+  "headline": "جولة داخل\nشاليهات أجمكان",
+  "kicker": "على بحر الخبر",
+  "subline": "خمس مساحات… والبحر يطلّ من كل نافذة",
+  "cta": "احجز شاليهك الآن",
+  "style": "",
+  "design": {
+    "caption": "ribbon",
+    "title_layout": "center",
+    "number": "text",
+    "accent": "sand",
+    "outro_bg": "photo",
+    "progress": "dots",
+    "watermark": "top_right",
+    "transition": "zoom",
+    "transition_seconds": 0.55,
+    "grade": 0.85,
+    "title_size": 94,
+    "caption_title_size": 54,
+    "radius": 26,
+    "scrim_photo": [
+      110,
+      35,
+      215
+    ],
+    "scrim_title": [
+      185,
+      95,
+      235
+    ]
+  },
+  "design_note": "الصور كلها داخلية بإضاءة ذهبية دافئة، فخفّضت التدرّج اللوني حتى لا تُصبح باردة، واخترت الرملي للتمييز ليجاور ضوء الشاليه، ولوحة ضيّقة (ribbon) تحتضن النص دون أن تحجب الأثاث.",
+  "shots": [
+    {
+      "photo": "assets/incoming/drive/DSC03524.jpg",
+      "title": "المدخل",
+      "body": "ثريا ودرج يستقبلانك أول ما تدخل",
+      "move": "rise"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03144.jpg",
+      "title": "غرفة بإطلالة",
+      "body": "نوافذ من الأرض للسقف والبحر خلفها",
+      "move": "pan_left"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03520.jpg",
+      "title": "طاولة العشاء",
+      "body": "مطبخ مفتوح ومساحة تكفي اللمّة",
+      "move": "zoom_in"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03525.jpg",
+      "title": "تفاصيل تهمّك",
+      "body": "حمّام بمغسلتين ومرايا وإضاءة هادئة",
+      "move": "pan_right"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03270.jpg",
+      "title": "المسبح ليلًا",
+      "body": "ضوء أزرق ونخيل وهدوء آخر الليل",
+      "move": "zoom_out"
+    }
+  ],
+  "caption": "جولة سريعة داخل شاليهات أجمكان على بحر الخبر 🏝\nمن المدخل إلى المسبح… والبحر يطلّ من كل نافذة.\nللحجز والاستفسار: 0535516054",
+  "hashtags": "#أجمكان #شاليهات_الخبر #الخبر #المنطقة_الشرقية #الدمام #البحر #شاليهات",
+  "hero_photo": "assets/incoming/drive/DSC03290 (1).jpg",
+  "audio": "",
+  "created": "2026-08-18"
+}

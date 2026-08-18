@@ -2,10 +2,9 @@
   "name_ar": "أجمكان",
   "name_en": "ajmkan",
   "handle": "@aajmkan",
-  "tagline_ar": "على البحر في الخبر",
+  "tagline_ar": "شاليهات على البحر في الخبر",
   "contact_phone": "0535516054",
   "contact_label_ar": "للحجز والاستفسار",
-
   "location": {
     "city_ar": "الخبر",
     "region_ar": "المنطقة الشرقية",
@@ -13,17 +12,15 @@
     "setting_ar": "على البحر",
     "line_ar": "الخبر · المنطقة الشرقية"
   },
-
   "colors": {
-    "ink":   "#08223C",
-    "navy":  "#0B2E52",
+    "ink": "#08223C",
+    "navy": "#0B2E52",
     "ocean": "#1B5E9E",
-    "sky":   "#4FB3E8",
-    "sun":   "#F7A81B",
-    "sand":  "#F6E7CE",
+    "sky": "#4FB3E8",
+    "sun": "#F7A81B",
+    "sand": "#F6E7CE",
     "white": "#FFFFFF"
   },
-
   "fonts": {
     "display": "brand/fonts/NotoKufiArabic-var.ttf",
     "headline": "brand/fonts/Almarai-ExtraBold.ttf",
@@ -31,12 +28,10 @@
     "body_bold": "brand/fonts/Tajawal-ExtraBold.ttf",
     "latin": "brand/fonts/Cairo-var.ttf"
   },
-
   "logo": {
     "mark": "brand/logo/ajmkan_mark.png",
     "wordmark_text": "أجمكان"
   },
-
   "video": {
     "width": 1080,
     "height": 1920,
@@ -45,16 +40,20 @@
     "safe_bottom": 300,
     "safe_side": 84
   },
-
   "voice": {
     "tone": "دافئ، راقٍ، مختصر — عربية فصحى بسيطة قريبة من القلب",
-    "avoid": ["المبالغة", "علامات التعجب المتكررة", "الجمل الطويلة"],
+    "avoid": [
+      "المبالغة",
+      "علامات التعجب المتكررة",
+      "الجمل الطويلة"
+    ],
     "cta_pool": [
-      "احجز رحلتك الآن",
-      "خطط لرحلتك القادمة",
+      "احجز شاليهك الآن",
+      "احجز إقامتك",
       "تواصل معنا للحجز",
-      "وجهتك القادمة تبدأ من هنا"
+      "إجازتك تبدأ من هنا"
     ],
     "cta_suffix_ar": "اتصل أو واتساب"
-  }
+  },
+  "venue_type_ar": "شاليهات"
 }

@@ -1,76 +1,166 @@
 {
-  "hero.jpg": {
-    "path": "assets/incoming/demo/hero.jpg",
+  "DSC03118.jpg": {
+    "path": "assets/incoming/drive/DSC03118.jpg",
     "tags": [
-      "غروب",
-      "سماء",
-      "نخيل"
+      "غرفة",
+      "إطلالة",
+      "بحر"
     ],
-    "description": "أفق عند الغروب مع نخيل في المقدّمة",
-    "people": false,
-    "time": "غروب",
-    "quality": "جيدة",
-    "vertical_ok": true
-  },
-  "shot1.jpg": {
-    "path": "assets/incoming/demo/shot1.jpg",
-    "tags": [
-      "سماء",
-      "نخيل",
-      "طبيعة"
-    ],
-    "description": "كثبان فاتحة تحت سماء نهارية",
+    "description": "غرفة نوم بإضاءة دافئة ونافذة ممتدة تطلّ على البحر",
     "people": false,
     "time": "نهار",
     "quality": "جيدة",
     "vertical_ok": true
   },
-  "shot2.jpg": {
-    "path": "assets/incoming/demo/shot2.jpg",
+  "DSC03119 (1).jpg": {
+    "path": "assets/incoming/drive/DSC03119 (1).jpg",
     "tags": [
-      "ليل",
-      "سماء"
+      "غرفة",
+      "إطلالة",
+      "بحر"
     ],
-    "description": "سماء ليلية مرصّعة بالنجوم",
+    "description": "غرفة نوم واسعة بشرفة زجاجية تطلّ على البحر",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC03144.jpg": {
+    "path": "assets/incoming/drive/DSC03144.jpg",
+    "tags": [
+      "غرفة",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "غرفة نوم بجدار خشبي ونوافذ من الأرض للسقف على البحر",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC03153.jpg": {
+    "path": "assets/incoming/drive/DSC03153.jpg",
+    "tags": [
+      "غرفة",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "غرفة نوم بجدار رخامي ونافذة كبيرة تطلّ على البحر",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC03161 (1).jpg": {
+    "path": "assets/incoming/drive/DSC03161 (1).jpg",
+    "tags": [
+      "صالة",
+      "مطبخ",
+      "جلسة"
+    ],
+    "description": "صالة مفتوحة على مطبخ وطاولة طعام مع فاصل خشبي مزخرف",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC03171 (1).jpg": {
+    "path": "assets/incoming/drive/DSC03171 (1).jpg",
+    "tags": [
+      "غرفة",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "غرفة نوم بنوافذ عريضة وإطلالة مباشرة على البحر",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC03255.jpg": {
+    "path": "assets/incoming/drive/DSC03255.jpg",
+    "tags": [
+      "غرفة"
+    ],
+    "description": "غرفة نوم أنيقة بجدار رخامي وإضاءة هادئة",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC03270.jpg": {
+    "path": "assets/incoming/drive/DSC03270.jpg",
+    "tags": [
+      "مسبح",
+      "ليل",
+      "نخيل",
+      "مبنى"
+    ],
+    "description": "مسبح خارجي مضاء ليلًا يحيط به النخيل وواجهة المبنى",
     "people": false,
     "time": "ليل",
     "quality": "جيدة",
     "vertical_ok": true
   },
-  "shot3.jpg": {
-    "path": "assets/incoming/demo/shot3.jpg",
+  "DSC03276.jpg": {
+    "path": "assets/incoming/drive/DSC03276.jpg",
     "tags": [
-      "بحر",
-      "سماء",
-      "نخيل"
+      "مبنى",
+      "ليل"
     ],
-    "description": "مياه زرقاء وأفق مفتوح",
+    "description": "واجهة الشاليهات ليلًا مع ممر مضاء بين المباني",
+    "people": false,
+    "time": "ليل",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC03290 (1).jpg": {
+    "path": "assets/incoming/drive/DSC03290 (1).jpg",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "صالة جلوس بتلفزيون وإضاءة معلّقة ونافذة تطلّ على البحر",
     "people": false,
     "time": "نهار",
     "quality": "جيدة",
     "vertical_ok": true
   },
-  "shot4.jpg": {
-    "path": "assets/incoming/demo/shot4.jpg",
+  "DSC03520.jpg": {
+    "path": "assets/incoming/drive/DSC03520.jpg",
     "tags": [
-      "غروب",
-      "سماء",
-      "نخيل"
+      "مطبخ",
+      "مطعم",
+      "جلسة",
+      "صالة",
+      "عائلة"
     ],
-    "description": "ضوء ذهبي منخفض قبيل المغيب",
+    "description": "صالة طعام مجهّزة مع مطبخ مفتوح وإضاءة معلّقة",
     "people": false,
-    "time": "غروب",
+    "time": "نهار",
     "quality": "جيدة",
     "vertical_ok": true
   },
-  "shot5.jpg": {
-    "path": "assets/incoming/demo/shot5.jpg",
+  "DSC03524.jpg": {
+    "path": "assets/incoming/drive/DSC03524.jpg",
     "tags": [
-      "بحر",
-      "شاطئ",
-      "سماء"
+      "صالة",
+      "مبنى"
     ],
-    "description": "خليج هادئ عند خط الشاطئ",
+    "description": "مدخل داخلي واسع بثريا وزهور ودرج",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC03525.jpg": {
+    "path": "assets/incoming/drive/DSC03525.jpg",
+    "tags": [
+      "حمام"
+    ],
+    "description": "حمّام بمغسلتين ومرايا وإضاءة معلّقة",
     "people": false,
     "time": "نهار",
     "quality": "جيدة",
