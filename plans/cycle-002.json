@@ -1,0 +1,75 @@
+{
+  "cycle": 2,
+  "concept": "reasons",
+  "topic": "أجمكان",
+  "headline": "ليش أجمكان؟\nخمس إجابات",
+  "kicker": "قبل ما تحجز",
+  "subline": "أسباب صغيرة… تفرق كثير في إجازتك",
+  "cta": "احجز ليلتك القادمة",
+  "style": "",
+  "design": {
+    "caption": "band",
+    "title_layout": "bottom",
+    "number": "big",
+    "accent": "sky",
+    "outro_bg": "brand",
+    "progress": "bar",
+    "watermark": "top_left",
+    "transition": "slide",
+    "transition_seconds": 0.35,
+    "grade": 1.15,
+    "title_size": 106,
+    "caption_title_size": 62,
+    "body_size": 38,
+    "radius": 0,
+    "scrim_photo": [
+      95,
+      25,
+      195
+    ],
+    "scrim_title": [
+      200,
+      90,
+      240
+    ]
+  },
+  "design_note": "قائمة مرقّمة تستحقّ ترقيمًا يُرى: شريط سفلي حادّ الحواف (radius صفر) يحمل كل نصّ في مكانه الثابت، ورقم ضخم شبحي على يساره يعدّ الأسباب، وانتقال انزلاقي سريع يحرّك القائمة بندًا بندًا. لون التمييز سماوي لا رملي لأن الصور كلها ضوء ذهبي دافئ فاحتاجت نقيضًا باردًا يفصل النص عن الجدار، وشريط تقدّم بدل النقاط ليعرف المشاهد كم بقي من الخمسة.",
+  "shots": [
+    {
+      "photo": "assets/incoming/drive/DSC03171 (1).jpg",
+      "title": "البحر من السرير",
+      "body": "تفتح عينك على الماء لا على جدار",
+      "move": "pan_left"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03161 (1).jpg",
+      "title": "صالة مفتوحة على المطبخ",
+      "body": "تطبخون وتجلسون في مساحة وحدة",
+      "move": "pan_right"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03153.jpg",
+      "title": "تفاصيل مشغولة بعناية",
+      "body": "رخام وخشب وإضاءة تنسدل من السقف",
+      "move": "rise"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03118.jpg",
+      "title": "غرفة بلا ضجيج",
+      "body": "تنام على هدوء وتصحى على ضوء هادئ",
+      "move": "zoom_in"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03276.jpg",
+      "title": "المساء هنا مختلف",
+      "body": "ممشى هادئ وأضواء ساهرة على الواجهات",
+      "move": "pan_right"
+    }
+  ],
+  "caption": "ليش أجمكان؟ خمس إجابات تشوفها بعينك 👇\nغرفة يطلّ منها الماء، مطبخ جاهز للّمة، تفاصيل مشغولة بعناية، هدوء تنام عليه، ومساء له طعم ثاني — كلها عندنا في الخبر.\nللحجز والاستفسار: 0535516054",
+  "hashtags": "#أجمكان #شاليهات_الخبر #الخبر #المنطقة_الشرقية #الدمام #البحر #وجهات_الشرقية #اكتشف_الخبر",
+  "hero_photo": "assets/incoming/drive/DSC03119 (1).jpg",
+  "audio": "",
+  "created": "2026-08-20",
+  "music_mood": "cinematic"
+}
