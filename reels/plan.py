@@ -12,6 +12,7 @@ from pathlib import Path
 
 from .catalog import Catalog
 from .concepts import CONCEPT_BY_KEY, Concept, hashtag_line
+from .patterns import PATTERN_BY_KEY, Pattern, next_pattern
 from .styles import STYLE_BY_KEY, Style, next_style
 
 
@@ -32,6 +33,8 @@ class Plan:
     kicker: str
     subline: str
     cta: str
+    pattern: str = ""             # نمط التحرير — بنية المونتاج
+    text_cards: list = field(default_factory=list)  # جُمل البطاقات النصّية
     style: str = ""               # نقطة انطلاق جاهزة (اختيارية)
     design: dict = field(default_factory=dict)   # مفاتيح التصميم التي تبتكرها المهارة
     design_note: str = ""         # لماذا هذا التصميم لهذه الحلقة — للسجلّ والمراجعة
@@ -47,6 +50,10 @@ class Plan:
     @property
     def concept_obj(self) -> Concept:
         return CONCEPT_BY_KEY[self.concept]
+
+    @property
+    def pattern_obj(self) -> Pattern:
+        return PATTERN_BY_KEY[self.pattern] if self.pattern else next_pattern(self.cycle)
 
     @property
     def style_obj(self) -> Style:
@@ -68,14 +75,24 @@ class Plan:
             except ValueError as exc:
                 problems.append(f"التصميم: {exc}")
 
-        c = self.concept_obj
+        if self.pattern and self.pattern not in PATTERN_BY_KEY:
+            problems.append(f"نمط تحرير غير معروف: {self.pattern}")
+            return problems
+        pat = self.pattern_obj
+
         if not self.hero_photo:
             problems.append("لا توجد صورة افتتاح (hero_photo)")
         if not self.shots:
             problems.append("لا توجد لقطات")
-        if len(self.shots) != c.scene_count:
+        if len(self.shots) != pat.photo_count:
             problems.append(
-                f"عدد اللقطات {len(self.shots)} لا يطابق فكرة «{c.name_ar}» ({c.scene_count})"
+                f"عدد اللقطات {len(self.shots)} لا يطابق نمط «{pat.name_ar}» "
+                f"({pat.photo_count} صورة)"
+            )
+        if len(self.text_cards) != pat.text_count:
+            problems.append(
+                f"عدد البطاقات النصّية {len(self.text_cards)} لا يطابق نمط "
+                f"«{pat.name_ar}» ({pat.text_count})"
             )
 
         used: set[str] = set()
@@ -154,37 +171,65 @@ class Plan:
 
 
 def build_timeline(plan: Plan):
-    """يحوّل الخطة إلى خط زمني جاهز للإخراج."""
-    from .scenes import OutroScene, PhotoScene, TitleScene
+    """يبني الخط الزمني بالسير على خانات نمط التحرير.
+
+    النمط يحدّد *بنية* المونتاج (أي أنواع المشاهد تتوالى وكم تدوم)، والفكرة
+    تحدّد النبرة وحركة الكاميرا، والتصميم يحدّد الشكل. الثلاثة مستقلّة، فلا
+    تتكرّر حلقة بعينها.
+    """
+    from .scenes import (FlashScene, GridScene, InsetScene, OutroScene,
+                         PhotoScene, TextCardScene, TitleScene)
     from .timeline import Timeline
 
-    c = plan.concept_obj
-    st = plan.style_obj
-    scenes = [
-        TitleScene(
-            photo=plan.hero_photo,
-            kicker=plan.kicker or c.kicker,
-            headline=plan.headline,
-            subline=plan.subline,
-            duration=c.title_scene_seconds,
-            style=st,
-        )
-    ]
-    total = len(plan.shots)
-    for i, shot in enumerate(plan.shots):
-        scenes.append(
-            PhotoScene(
-                photo=shot.photo,
-                title=shot.title,
-                body=shot.body,
-                index=i + 1,
-                total=total,
-                move=shot.move or c.moves[i % len(c.moves)],
-                duration=c.photo_scene_seconds,
-                style=st,
-            )
-        )
-    scenes.append(
-        OutroScene(cta=plan.cta, duration=c.outro_seconds, style=st, photo=plan.hero_photo)
-    )
+    c, st, pat = plan.concept_obj, plan.style_obj, plan.pattern_obj
+    shots, cards = list(plan.shots), list(plan.text_cards)
+    scenes, si, ci, mi = [], 0, 0, 0
+    numbered = sum(1 for s in pat.slots if s.kind in ("photo", "inset"))
+    index = 0
+
+    for slot in pat.slots:
+        if slot.kind == "title":
+            scenes.append(TitleScene(
+                photo=plan.hero_photo, kicker=plan.kicker or c.kicker,
+                headline=plan.headline, subline=plan.subline,
+                duration=slot.seconds, style=st))
+
+        elif slot.kind == "outro":
+            scenes.append(OutroScene(cta=plan.cta, duration=slot.seconds,
+                                     style=st, photo=plan.hero_photo))
+
+        elif slot.kind == "text":
+            line = cards[ci] if ci < len(cards) else plan.subline
+            ci += 1
+            scenes.append(TextCardScene(line=line, duration=slot.seconds, style=st))
+
+        elif slot.kind == "flash":
+            group = shots[si:si + slot.photos]
+            si += slot.photos
+            scenes.append(FlashScene(
+                photos=tuple(g.photo for g in group),
+                kicker=group[0].title if group else "",
+                duration=slot.seconds, style=st))
+
+        elif slot.kind == "grid":
+            group = shots[si:si + slot.photos]
+            si += slot.photos
+            scenes.append(GridScene(
+                photos=tuple(g.photo for g in group),
+                title=group[0].title if group else "",
+                body=group[0].body if group else "",
+                duration=slot.seconds, style=st))
+
+        else:  # photo | inset
+            shot = shots[si] if si < len(shots) else shots[-1]
+            si += 1
+            index += 1
+            move = shot.move or c.moves[mi % len(c.moves)]
+            mi += 1
+            cls = InsetScene if slot.kind == "inset" else PhotoScene
+            scenes.append(cls(
+                photo=shot.photo, title=shot.title, body=shot.body,
+                index=index, total=numbered, move=move,
+                duration=slot.seconds, style=st))
+
     return Timeline(scenes=scenes, style=st)

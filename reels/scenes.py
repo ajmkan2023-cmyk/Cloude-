@@ -533,3 +533,263 @@ class OutroScene(Scene):
         paste_alpha(img, self._handle, ((W - self._handle.width) // 2, min(y, H - BOTTOM)), p_handle)
 
         return img
+
+
+# ------------------------------------------------------- مشاهد المونتاج
+# الأنواع التالية هي ما يكسر رتابة «صورة كاملة لكل مشهد». يختار نمط التحرير
+# (`patterns.py`) أيّها يظهر ومتى، فيتغيّر إحساس الفيديو لا لونه فقط.
+
+
+@dataclass
+class GridScene(Scene):
+    """أربع لقطات (أو ثلاث/اثنتان) في إطار واحد — توصل سعة المكان في لمحة."""
+
+    photos: tuple = ()
+    title: str = ""
+    body: str = ""
+    duration: float = 3.6
+    style: Style = field(default_factory=lambda: STYLES[0])
+
+    _cells: list = field(default_factory=list, repr=False)
+    _boxes: list = field(default_factory=list, repr=False)
+    _bg: Image.Image = field(default=None, repr=False)
+    _title: list = field(default_factory=list, repr=False)
+    _body: list = field(default_factory=list, repr=False)
+
+    def prepare(self) -> None:
+        st = self.style
+        gap, edge = 10, 0
+        n = len(self.photos)
+
+        # التخطيط يتبع عدد الصور: ٤ شبكة، ٣ كبيرة فوق واثنتان تحت، ٢ مكدّستان
+        top = TOP + 40
+        bottom = H - BOTTOM + 120
+        area_h = bottom - top
+        if n >= 4:
+            cw, ch = (W - gap) // 2, (area_h - gap) // 2
+            self._boxes = [(edge, top), (edge + cw + gap, top),
+                           (edge, top + ch + gap), (edge + cw + gap, top + ch + gap)]
+            sizes = [(cw, ch)] * 4
+        elif n == 3:
+            big_h = int(area_h * 0.52)
+            cw = (W - gap) // 2
+            self._boxes = [(edge, top), (edge, top + big_h + gap), (edge + cw + gap, top + big_h + gap)]
+            sizes = [(W, big_h), (cw, area_h - big_h - gap), (cw, area_h - big_h - gap)]
+        else:
+            ch = (area_h - gap) // 2
+            self._boxes = [(edge, top), (edge, top + ch + gap)]
+            sizes = [(W, ch)] * 2
+
+        self._cells = []
+        for path, size in zip(self.photos[: len(self._boxes)], sizes):
+            img = fx.cover(load_photo(path), size)
+            self._cells.append(fx.grade(img, st.grade).convert("RGBA"))
+
+        self._bg = Image.new("RGBA", (W, H), (*B.color("ink"), 255))
+
+        max_w = W - SIDE * 2
+        accent = B.color(st.accent)
+        t_style = ty.fit_size(
+            self.title,
+            ty.TextStyle(role="headline", size=st.caption_title_size, align="center",
+                         line_spacing=1.18, max_width=max_w, fill=(*B.color("white"), 255),
+                         shadow=(0, 0, 0, 150), shadow_blur=10),
+            max_lines=2,
+        )
+        t_block = ty.wrap(self.title, t_style)
+        self._title = tight_lines(t_block, (W // 2, TOP - 40 if False else H - BOTTOM + 140))
+
+        if self.body:
+            b_style = ty.TextStyle(role="body", size=st.body_size, align="center",
+                                   line_spacing=1.30, max_width=max_w,
+                                   fill=(*accent, 240), shadow=(0, 0, 0, 130), shadow_blur=8)
+            b_block = ty.wrap(self.body, b_style)
+            self._body = tight_lines(b_block, (W // 2, H - BOTTOM + 140 + t_block.height + 14))
+
+    def frame(self, t: float) -> Image.Image:
+        img = self._bg.copy()
+        for i, (cell, (x, y)) in enumerate(zip(self._cells, self._boxes)):
+            p = mo.ease_out_cubic(mo.window(t, 0.08 * i, 0.55))
+            # كل خليّة تكبر قليلًا بمرور الوقت فلا تبدو الشبكة جامدة
+            z = 1.0 + 0.05 * mo.ease_in_out(mo.window(t, 0, self.duration))
+            zw, zh = int(cell.width * z), int(cell.height * z)
+            grown = cell.resize((zw, zh), Image.BILINEAR)
+            grown = grown.crop(((zw - cell.width) // 2, (zh - cell.height) // 2,
+                                (zw - cell.width) // 2 + cell.width,
+                                (zh - cell.height) // 2 + cell.height))
+            paste_alpha(img, grown, (x, y + int(24 * (1 - p))), p)
+
+        a = mo.inout_alpha(t, self.duration, fade_in=0.5, fade_out=0.3)
+        for layer, (x, y) in self._title:
+            paste_alpha(img, layer, (x, y), a)
+        for layer, (x, y) in self._body:
+            paste_alpha(img, layer, (x, y), a)
+        return img
+
+
+@dataclass
+class FlashScene(Scene):
+    """قطع سريع: عدّة لقطات بأقل من نصف ثانية — يشدّ الانتباه في الافتتاح."""
+
+    photos: tuple = ()
+    kicker: str = ""
+    duration: float = 2.4
+    style: Style = field(default_factory=lambda: STYLES[0])
+
+    _frames: list = field(default_factory=list, repr=False)
+    _kicker: list = field(default_factory=list, repr=False)
+
+    def prepare(self) -> None:
+        st = self.style
+        self._frames = [
+            fx.grade(fx.cover(load_photo(p), (W, H)), st.grade).convert("RGBA")
+            for p in self.photos
+        ]
+        if self.kicker:
+            style = ty.TextStyle(role="display", size=72, align="center",
+                                 fill=(*B.color("white"), 255), max_width=W - SIDE * 2,
+                                 shadow=(0, 0, 0, 170), shadow_blur=18)
+            block = ty.wrap(self.kicker, style)
+            self._kicker = tight_lines(block, (W // 2, int(H * 0.46)))
+
+    def frame(self, t: float) -> Image.Image:
+        n = max(1, len(self._frames))
+        per = self.duration / n
+        i = min(n - 1, int(t / per))
+        local = (t - i * per) / per
+
+        # نبضة تكبير قصيرة في بداية كل قطع تعطي إحساس الضربة
+        z = 1.10 - 0.10 * mo.ease_out_quint(min(1.0, local * 2.2))
+        base = self._frames[i]
+        zw, zh = int(W * z), int(H * z)
+        img = base.resize((zw, zh), Image.BILINEAR).crop(
+            ((zw - W) // 2, (zh - H) // 2, (zw - W) // 2 + W, (zh - H) // 2 + H)
+        )
+        img.alpha_composite(fx.scrim((W, H), 90, 30, 150))
+
+        for layer, (x, y) in self._kicker:
+            paste_alpha(img, layer, (x, y), mo.inout_alpha(t, self.duration, 0.35, 0.3))
+        return img
+
+
+@dataclass
+class TextCardScene(Scene):
+    """بطاقة نصّية بلا صورة — تفصل بين اللقطات وتمنح الجملة وزنًا."""
+
+    line: str = ""
+    duration: float = 2.2
+    style: Style = field(default_factory=lambda: STYLES[0])
+
+    _bg: Image.Image = field(default=None, repr=False)
+    _lines: list = field(default_factory=list, repr=False)
+    _rule: Image.Image = field(default=None, repr=False)
+
+    def prepare(self) -> None:
+        st = self.style
+        accent = B.color(st.accent)
+        self._bg = fx.brand_backdrop((W, H))
+
+        style = ty.fit_size(
+            self.line,
+            ty.TextStyle(role="display", size=84, align="center", line_spacing=1.22,
+                         max_width=W - SIDE * 2, fill=(*B.color("white"), 255),
+                         shadow=(0, 0, 0, 130), shadow_blur=16),
+            max_lines=3,
+        )
+        block = ty.wrap(self.line, style)
+        self._lines = tight_lines(block, (W // 2, int(H * 0.44) - block.height // 2))
+
+        rule = Image.new("RGBA", (120, 6), (0, 0, 0, 0))
+        ImageDraw.Draw(rule).rounded_rectangle((0, 0, 119, 5), 3, fill=(*accent, 255))
+        self._rule = rule
+
+    def frame(self, t: float) -> Image.Image:
+        img = self._bg.copy()
+        for i, (layer, (x, y)) in enumerate(self._lines):
+            p = mo.ease_out_quint(mo.window(t, 0.12 + i * 0.12, 0.7))
+            paste_alpha(img, layer, (x, y + int(34 * (1 - p))), p)
+        p = mo.ease_out_cubic(mo.window(t, 0.10, 0.55))
+        grown = self._rule.crop((0, 0, max(2, int(120 * p)), 6))
+        paste_alpha(img, grown, ((W - grown.width) // 2, int(H * 0.44) + 130), p)
+        return img
+
+
+@dataclass
+class InsetScene(Scene):
+    """الصورة داخل إطار بهامش العلامة لا ملء الشاشة — إحساس مطبوع أنيق."""
+
+    photo: str = ""
+    title: str = ""
+    body: str = ""
+    index: int = 1
+    total: int = 1
+    move: str = "zoom_in"
+    duration: float = 3.0
+    style: Style = field(default_factory=lambda: STYLES[0])
+
+    _base: Image.Image = field(default=None, repr=False)
+    _bias: float = 0.5
+    _bg: Image.Image = field(default=None, repr=False)
+    _box: tuple = (0, 0, 0, 0)
+    _mask: Image.Image = field(default=None, repr=False)
+    _title: list = field(default_factory=list, repr=False)
+    _body: list = field(default_factory=list, repr=False)
+
+    def prepare(self) -> None:
+        st = self.style
+        margin_x, top, height = 74, TOP + 130, int(H * 0.52)
+        self._box = (margin_x, top, W - margin_x, top + height)
+        bw, bh = self._box[2] - self._box[0], height
+
+        img = load_photo(self.photo)
+        self._bias = fx.smart_crop_bias(img)
+        self._base = fx.cover(img, (int(bw * 1.16), int(bh * 1.16)))
+        self._bg = fx.brand_backdrop((W, H))
+        self._mask = fx.rounded_mask((bw, bh), st.radius or 18)
+
+        accent = B.color(st.accent)
+        max_w = W - margin_x * 2
+        t_style = ty.fit_size(
+            self.title,
+            ty.TextStyle(role="headline", size=st.caption_title_size, align="right",
+                         line_spacing=1.18, max_width=max_w, fill=(*B.color("white"), 255),
+                         shadow=(0, 0, 0, 110), shadow_blur=8),
+            max_lines=2,
+        )
+        t_block = ty.wrap(self.title, t_style)
+        text_top = top + height + 54
+        self._title = tight_lines(t_block, (W - margin_x, text_top))
+
+        if self.body:
+            b_style = ty.TextStyle(role="body", size=st.body_size, align="right",
+                                   line_spacing=1.30, max_width=max_w,
+                                   fill=(*accent, 235), shadow=(0, 0, 0, 100), shadow_blur=8)
+            b_block = ty.wrap(self.body, b_style)
+            self._body = tight_lines(b_block, (W - margin_x, text_top + t_block.height + 16))
+
+    def frame(self, t: float) -> Image.Image:
+        img = self._bg.copy()
+        x0, y0, x1, y1 = self._box
+        bw, bh = x1 - x0, y1 - y0
+
+        p = mo.ease_in_out(mo.window(t, 0, self.duration))
+        z = mo.lerp(1.16, 1.02, p) if self.move == "zoom_out" else mo.lerp(1.02, 1.16, p)
+        win_w = min(self._base.width, max(bw, int(round(bw * 1.16 / z))))
+        win_h = min(self._base.height, max(bh, int(round(bh * 1.16 / z))))
+        left = int((self._base.width - win_w) * 0.5)
+        topc = int((self._base.height - win_h) * self._bias)
+        cell = self._base.crop((left, topc, left + win_w, topc + win_h)).resize((bw, bh), Image.BICUBIC)
+        cell = cell.convert("RGBA")
+        cell.putalpha(self._mask)
+
+        rise = mo.ease_out_quint(mo.window(t, 0.0, 0.7))
+        a = mo.inout_alpha(t, self.duration, 0.45, 0.3)
+        paste_alpha(img, cell, (x0, y0 + int(30 * (1 - rise))), a)
+
+        for i, (layer, (lx, ly)) in enumerate(self._title):
+            q = mo.ease_out_cubic(mo.window(t, 0.20 + i * 0.08, 0.6))
+            paste_alpha(img, layer, (lx, ly + int(16 * (1 - q))), min(a, q))
+        for i, (layer, (lx, ly)) in enumerate(self._body):
+            q = mo.ease_out_cubic(mo.window(t, 0.34 + i * 0.07, 0.6))
+            paste_alpha(img, layer, (lx, ly + int(12 * (1 - q))), min(a, q))
+        return img
