@@ -284,5 +284,162 @@
     "time": "نهار",
     "quality": "جيدة",
     "vertical_ok": true
+  },
+  "DSC02171.JPG": {
+    "path": "assets/incoming/drive/DSC02171.JPG",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "مطبخ",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "صالة وطاولة طعام بفاصل خشبي مزخرف ونوافذ تطلّ على الماء",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02176.JPG": {
+    "path": "assets/incoming/drive/DSC02176.JPG",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "إطلالة",
+      "بحر",
+      "نخيل"
+    ],
+    "description": "صالة واسعة بكنب زاوية ونوافذ عريضة على النخيل والماء",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02183.JPG": {
+    "path": "assets/incoming/drive/DSC02183.JPG",
+    "tags": [
+      "مطبخ",
+      "جلسة"
+    ],
+    "description": "مطبخ حديث بأجهزة مدمجة وطاولة رخامية",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02189.JPG": {
+    "path": "assets/incoming/drive/DSC02189.JPG",
+    "tags": [
+      "مسبح",
+      "نخيل",
+      "بحر",
+      "مبنى"
+    ],
+    "description": "مسبح خارجي نهارًا يحيط به النخيل والبحر خلفه",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02198.JPG": {
+    "path": "assets/incoming/drive/DSC02198.JPG",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "مطبخ"
+    ],
+    "description": "صالة مفتوحة على المطبخ وطاولة الطعام بفاصل مزخرف",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02203.JPG": {
+    "path": "assets/incoming/drive/DSC02203.JPG",
+    "tags": [
+      "غرفة",
+      "إطلالة"
+    ],
+    "description": "غرفة نوم بطاولة زينة ومرآة ونافذة",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02207.JPG": {
+    "path": "assets/incoming/drive/DSC02207.JPG",
+    "tags": [
+      "غرفة",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "غرفة نوم بنوافذ عريضة تطلّ على الماء",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02213.JPG": {
+    "path": "assets/incoming/drive/DSC02213.JPG",
+    "tags": [
+      "غرفة",
+      "إطلالة"
+    ],
+    "description": "غرفة نوم بخزانة خشبية ونوافذ عالية",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02217.JPG": {
+    "path": "assets/incoming/drive/DSC02217.JPG",
+    "tags": [
+      "غرفة",
+      "إطلالة"
+    ],
+    "description": "غرفة نوم بمسند سرير مضاء ونوافذ جانبية",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02222.JPG": {
+    "path": "assets/incoming/drive/DSC02222.JPG",
+    "tags": [
+      "غرفة",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "غرفة نوم بشرفة زجاجية تطلّ على الماء",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02227.JPG": {
+    "path": "assets/incoming/drive/DSC02227.JPG",
+    "tags": [
+      "غرفة",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "غرفة نوم بخزانة ونوافذ عريضة على الماء",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02233.JPG": {
+    "path": "assets/incoming/drive/DSC02233.JPG",
+    "tags": [
+      "غرفة",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "غرفة نوم بشرفة مفتوحة على الماء",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
   }
 }

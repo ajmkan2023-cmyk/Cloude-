@@ -6,6 +6,10 @@
   "kicker": "إجازتك القادمة",
   "subline": "نخيل وماء من نافذة الصالة — في الخبر",
   "cta": "احجز شاليهك الآن",
+  "pattern": "pulse",
+  "text_cards": [
+    "إجازتك تبدأ بمكالمة"
+  ],
   "style": "",
   "design": {
     "caption": "corner",
@@ -16,7 +20,7 @@
     "progress": "none",
     "watermark": "top_right",
     "transition": "fade",
-    "transition_seconds": 0.45,
+    "transition_seconds": 0.3,
     "grade": 0.95,
     "title_size": 96,
     "caption_title_size": 56,
@@ -33,40 +37,88 @@
       230
     ]
   },
-  "design_note": "صور نهارية فاتحة والنص مرفوع إلى أعلى الإطار، فقلبت تدرّج التعتيم ليثقل في الأعلى خلف البطاقة ويخفّ في الأسفل حيث يبقى الأثاث والضوء مكشوفين.",
+  "design_note": "نمط النبض يقطع سريعًا، فقصّرت الانتقال إلى ٠٫٣ ثانية حتى لا يبتلع المزجُ اللقطات. والصور نهارية فاتحة فرفعت النص إلى أعلى الإطار وأثقلت التعتيم هناك وحده.",
   "shots": [
     {
-      "photo": "assets/incoming/drive/DSC02170.JPG",
-      "title": "صالة تتنفّس",
-      "body": "سقف عالٍ وجلسة تجمع الكل",
+      "photo": "assets/incoming/drive/DSC02189.JPG",
+      "title": "شوف بنفسك",
+      "body": "",
       "move": ""
     },
     {
-      "photo": "assets/incoming/drive/DSC02175.JPG",
-      "title": "مطبخ كامل",
-      "body": "جزيرة ومقاعد وكل ما يلزم",
+      "photo": "assets/incoming/drive/DSC02176.JPG",
+      "title": "صالة واسعة",
+      "body": "",
       "move": ""
     },
     {
-      "photo": "assets/incoming/drive/DSC02212.JPG",
-      "title": "غرفة تريح",
-      "body": "ضوء دافئ ونافذة واسعة",
+      "photo": "assets/incoming/drive/DSC02183.JPG",
+      "title": "مطبخ مجهّز",
+      "body": "",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02217.JPG",
+      "title": "غرفة مضيئة",
+      "body": "",
       "move": ""
     },
     {
       "photo": "assets/incoming/drive/DSC02220.JPG",
-      "title": "تفاصيل نظيفة",
-      "body": "رخام ومرآة وزهور طازجة",
+      "title": "تفاصيل مرتّبة",
+      "body": "",
       "move": ""
     },
     {
-      "photo": "assets/incoming/drive/DSC02236.JPG",
-      "title": "غرف تكفيكم",
-      "body": "مساحة لكل من معك",
+      "photo": "assets/incoming/drive/DSC02171.JPG",
+      "title": "طاولة تجمع",
+      "body": "",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02207.JPG",
+      "title": "غرفة على الماء",
+      "body": "نوافذ عريضة والضوء يدخل من كل جهة",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02198.JPG",
+      "title": "صالة مفتوحة",
+      "body": "مطبخ وطاولة ومساحة تجمع الكل",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02203.JPG",
+      "title": "وغرف أكثر",
+      "body": "",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02213.JPG",
+      "title": "خزائن واسعة",
+      "body": "",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02222.JPG",
+      "title": "شرفة زجاجية",
+      "body": "",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02227.JPG",
+      "title": "إطلالة مباشرة",
+      "body": "",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02233.JPG",
+      "title": "شرفة تفتح",
+      "body": "تفتح الباب فيدخل الهواء",
       "move": ""
     }
   ],
-  "caption": "خمس مساحات تنتظرك في أجمكان — الخبر، على البحر 🌴\nصالة تتنفّس، مطبخ كامل، غرف تريح، وتفاصيل تلاحظها من أول نظرة.\nللحجز والاستفسار: 0535516054",
+  "caption": "١٣ لقطة في أقل من ٢٠ ثانية — هذا أجمكان على بحر الخبر ⚡\nصالات واسعة، مطابخ مجهّزة، وغرف تطلّ على الماء.\nللحجز والاستفسار: 0535516054",
   "hashtags": "#أجمكان #شاليهات_الخبر #الخبر #المنطقة_الشرقية #الدمام #البحر #احجز_الآن #عروض",
   "hero_photo": "assets/incoming/drive/DSC02181.JPG",
   "audio": "",
