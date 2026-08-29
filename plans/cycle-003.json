@@ -1,0 +1,75 @@
+{
+  "cycle": 3,
+  "concept": "invitation",
+  "topic": "إجازة على البحر",
+  "headline": "جاهز لإجازة\nعلى البحر؟",
+  "kicker": "إجازتك القادمة",
+  "subline": "نخيل وماء من نافذة الصالة — في الخبر",
+  "cta": "احجز شاليهك الآن",
+  "style": "",
+  "design": {
+    "caption": "corner",
+    "title_layout": "bottom",
+    "number": "none",
+    "accent": "sun",
+    "outro_bg": "brand",
+    "progress": "none",
+    "watermark": "top_right",
+    "transition": "fade",
+    "transition_seconds": 0.45,
+    "grade": 0.95,
+    "title_size": 96,
+    "caption_title_size": 56,
+    "body_size": 34,
+    "radius": 20,
+    "scrim_photo": [
+      195,
+      45,
+      150
+    ],
+    "scrim_title": [
+      175,
+      60,
+      230
+    ]
+  },
+  "design_note": "صور نهارية فاتحة والنص مرفوع إلى أعلى الإطار، فقلبت تدرّج التعتيم ليثقل في الأعلى خلف البطاقة ويخفّ في الأسفل حيث يبقى الأثاث والضوء مكشوفين.",
+  "shots": [
+    {
+      "photo": "assets/incoming/drive/DSC02170.JPG",
+      "title": "صالة تتنفّس",
+      "body": "سقف عالٍ وجلسة تجمع الكل",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02175.JPG",
+      "title": "مطبخ كامل",
+      "body": "جزيرة ومقاعد وكل ما يلزم",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02212.JPG",
+      "title": "غرفة تريح",
+      "body": "ضوء دافئ ونافذة واسعة",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02220.JPG",
+      "title": "تفاصيل نظيفة",
+      "body": "رخام ومرآة وزهور طازجة",
+      "move": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02236.JPG",
+      "title": "غرف تكفيكم",
+      "body": "مساحة لكل من معك",
+      "move": ""
+    }
+  ],
+  "caption": "خمس مساحات تنتظرك في أجمكان — الخبر، على البحر 🌴\nصالة تتنفّس، مطبخ كامل، غرف تريح، وتفاصيل تلاحظها من أول نظرة.\nللحجز والاستفسار: 0535516054",
+  "hashtags": "#أجمكان #شاليهات_الخبر #الخبر #المنطقة_الشرقية #الدمام #البحر #احجز_الآن #عروض",
+  "hero_photo": "assets/incoming/drive/DSC02181.JPG",
+  "audio": "",
+  "music_mood": "bright",
+  "created": "2026-08-29"
+}

@@ -165,5 +165,124 @@
     "time": "نهار",
     "quality": "جيدة",
     "vertical_ok": true
+  },
+  "DSC02170.JPG": {
+    "path": "assets/incoming/drive/DSC02170.JPG",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "مبنى"
+    ],
+    "description": "صالة مزدوجة الارتفاع بثريا ودرج رخامي وطاولة طعام",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02175.JPG": {
+    "path": "assets/incoming/drive/DSC02175.JPG",
+    "tags": [
+      "مطبخ",
+      "صالة",
+      "جلسة"
+    ],
+    "description": "مطبخ حديث بجزيرة ومقاعد عالية وإضاءة معلّقة",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02181.JPG": {
+    "path": "assets/incoming/drive/DSC02181.JPG",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "إطلالة",
+      "بحر",
+      "نخيل"
+    ],
+    "description": "صالة بنافذة عريضة تطلّ على نخيل والواجهة البحرية",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02185.JPG": {
+    "path": "assets/incoming/drive/DSC02185.JPG",
+    "tags": [
+      "حمام"
+    ],
+    "description": "حمّام رخامي بمغسلة ونباتات خضراء",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02210.JPG": {
+    "path": "assets/incoming/drive/DSC02210.JPG",
+    "tags": [
+      "حمام"
+    ],
+    "description": "حمّام بمغسلة رخامية ومرآة مضيئة ومناشف",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02212.JPG": {
+    "path": "assets/incoming/drive/DSC02212.JPG",
+    "tags": [
+      "غرفة",
+      "إطلالة"
+    ],
+    "description": "غرفة نوم بإضاءة دافئة ونوافذ عريضة",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02220.JPG": {
+    "path": "assets/incoming/drive/DSC02220.JPG",
+    "tags": [
+      "حمام"
+    ],
+    "description": "حمّام رخامي بمرآة دائرية مضيئة وزهور",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02225.JPG": {
+    "path": "assets/incoming/drive/DSC02225.JPG",
+    "tags": [
+      "غرفة"
+    ],
+    "description": "غرفة نوم بخزانة خشبية مفتوحة ونافذة",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02230.JPG": {
+    "path": "assets/incoming/drive/DSC02230.JPG",
+    "tags": [
+      "حمام"
+    ],
+    "description": "حمّام بمرآة مضيئة وزهور وقاطع زجاجي",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02236.JPG": {
+    "path": "assets/incoming/drive/DSC02236.JPG",
+    "tags": [
+      "غرفة"
+    ],
+    "description": "غرفة نوم بطاولة زينة ومرآة وإضاءة هادئة",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
   }
 }
