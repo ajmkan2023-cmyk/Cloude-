@@ -2,16 +2,19 @@
 
 لماذا ملف مستقل: هوية أجمكان بحريّة زرقاء، وهوية اليوم الوطني خضراء. بدل
 حشو فضاء التصميم العام بمفاتيح تخصّ مناسبة واحدة في السنة، جُمع هنا كل ما
-يخصّها: اللون الرسمي، ونقش السدو المرسوم برمجيًا، والمشاهد الخاصة.
+يخصّها: اللون الرسمي، والتدرّج، والمشاهد الخاصة.
 
 قرار مقصود: لا يُرسم العلم السعودي ولا شعار الدولة (السيفان والنخلة) في أي
 مشهد. العلم يحمل الشهادة وله نظام يحكم استعماله، فالاحترافي — وما تفعله
-العلامات الكبيرة فعلًا — هو الاكتفاء بالأخضر الرسمي وبنقوش السدو التراثية.
+العلامات الكبيرة فعلًا — هو الاكتفاء بالأخضر الرسمي وبتكوين نظيف.
+
+اللغة البصرية هنا: حقل أخضر بتدرّج، وحافّة ذهبية واحدة تفصل الصورة عن النص،
+وخيوط ذهبية رفيعة ترافق العناوين. بلا زخرفة نسيجية — التصميم يعتمد على
+التكوين والفراغ لا على النقش.
 """
 
 from __future__ import annotations
 
-import random
 from dataclasses import dataclass, field
 from functools import lru_cache
 
@@ -90,109 +93,6 @@ def national_backdrop(size: tuple[int, int]) -> Image.Image:
     return base
 
 
-# ------------------------------------------------------------------ السدو
-# نقش السدو نسيج بدوي سعودي: صفوف أفقية متراصّة من وحدات هندسية بسيطة
-# (مثلثات، معيّنات، أمشاط، عيون). نرسمه برمجيًا فيخرج نظيفًا بأي مقاس،
-# ويتبدّل تركيبه بتبدّل البذرة فلا يتكرّر شريطان متطابقان في الفيديو نفسه.
-
-_ROW_KINDS = ("solid", "hairline", "triangles", "diamonds", "combs", "eyes", "zigzag")
-
-
-def _row_solid(d: ImageDraw.ImageDraw, y: int, rh: int, w: int, ink, alt) -> None:
-    d.rectangle((0, y, w, y + rh), fill=ink)
-
-
-def _row_hairline(d: ImageDraw.ImageDraw, y: int, rh: int, w: int, ink, alt) -> None:
-    mid = y + rh // 2
-    t = max(1, rh // 4)
-    d.rectangle((0, mid - t // 2, w, mid + t // 2 + t % 2), fill=ink)
-
-
-def _row_triangles(d: ImageDraw.ImageDraw, y: int, rh: int, w: int, ink, alt) -> None:
-    unit = max(8, rh)
-    for i in range(0, w + unit, unit):
-        up = (i // unit) % 2 == 0
-        if up:
-            d.polygon([(i, y + rh), (i + unit / 2, y), (i + unit, y + rh)], fill=ink)
-        else:
-            d.polygon([(i, y), (i + unit / 2, y + rh), (i + unit, y)], fill=alt)
-
-
-def _row_diamonds(d: ImageDraw.ImageDraw, y: int, rh: int, w: int, ink, alt) -> None:
-    unit = max(10, int(rh * 1.15))
-    cy = y + rh / 2
-    for i in range(0, w + unit, unit):
-        cx = i + unit / 2
-        d.polygon([(cx, y), (cx + unit / 2, cy), (cx, y + rh), (cx - unit / 2, cy)], fill=ink)
-        k = 0.42
-        d.polygon([(cx, y + rh * (0.5 - k)), (cx + unit * k / 2, cy),
-                   (cx, y + rh * (0.5 + k)), (cx - unit * k / 2, cy)], fill=alt)
-
-
-def _row_combs(d: ImageDraw.ImageDraw, y: int, rh: int, w: int, ink, alt) -> None:
-    unit = max(8, rh)
-    tooth = max(2, unit // 3)
-    for i in range(0, w + unit, unit):
-        d.rectangle((i, y, i + tooth, y + rh), fill=ink)
-        d.rectangle((i + tooth, y + rh // 2, i + unit, y + rh), fill=alt)
-
-
-def _row_eyes(d: ImageDraw.ImageDraw, y: int, rh: int, w: int, ink, alt) -> None:
-    unit = max(10, int(rh * 1.4))
-    pad = max(1, rh // 5)
-    for i in range(0, w + unit, unit):
-        d.rectangle((i + pad, y + pad, i + unit - pad, y + rh - pad), fill=ink)
-        d.rectangle((i + pad * 2, y + pad * 2, i + unit - pad * 2, y + rh - pad * 2), fill=alt)
-
-
-def _row_zigzag(d: ImageDraw.ImageDraw, y: int, rh: int, w: int, ink, alt) -> None:
-    unit = max(10, rh)
-    t = max(2, rh // 4)
-    pts = []
-    for i in range(0, w + unit * 2, unit):
-        pts.append((i, y + (t if (i // unit) % 2 == 0 else rh - t)))
-    d.line(pts, fill=ink, width=t, joint="curve")
-
-
-_ROW_FN = {
-    "solid": _row_solid, "hairline": _row_hairline, "triangles": _row_triangles,
-    "diamonds": _row_diamonds, "combs": _row_combs, "eyes": _row_eyes,
-    "zigzag": _row_zigzag,
-}
-
-
-@lru_cache(maxsize=32)
-def sadu_band(width: int, height: int, seed: int = 0, on_dark: bool = True) -> Image.Image:
-    """شريط سدو مرسوم برمجيًا — تركيب الصفوف يتبدّل مع البذرة."""
-    rng = random.Random(seed)
-    white = (*B.color("white"), 255)
-    green = (*B.color("green"), 255)
-    gold = (*B.color("gold"), 255)
-    deep = (*B.color("green_deep"), 255)
-
-    band = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    d = ImageDraw.Draw(band)
-    d.rectangle((0, 0, width, height), fill=deep if on_dark else white)
-
-    # تركيب الصفوف: صفّان زخرفيان كبيران بينهما فواصل رفيعة
-    plan = ["hairline", rng.choice(("triangles", "diamonds", "eyes")), "hairline",
-            rng.choice(("combs", "zigzag", "triangles")), "hairline"]
-    weights = [0.10, 0.34, 0.08, 0.34, 0.10]
-
-    inks = [gold, white, gold, green if on_dark else green, gold]
-    alts = [gold, green, gold, white, gold]
-    if not on_dark:
-        inks = [green, green, gold, green, green]
-        alts = [green, white, gold, gold, green]
-
-    y = 0
-    for kind, wgt, ink, alt in zip(plan, weights, inks, alts):
-        rh = max(2, int(height * wgt))
-        _ROW_FN[kind](d, y, rh, width, ink, alt)
-        y += rh
-    return band
-
-
 # ------------------------------------------------------------------ اللمعة
 def shine(layer: Image.Image, p: float, band: float = 0.30,
           strength: int = 190, slant: float = 0.55) -> Image.Image:
@@ -250,8 +150,6 @@ class NationalTitleScene(Scene):
     _scrim: Image.Image = field(default=None, repr=False)
     _ghost: Image.Image = field(default=None, repr=False)
     _ghost_pos: tuple = (0, 0)
-    _band: Image.Image = field(default=None, repr=False)
-    _band_y: int = 0
     _kicker: list = field(default_factory=list, repr=False)
     _head: list = field(default_factory=list, repr=False)
     _sub: list = field(default_factory=list, repr=False)
@@ -264,9 +162,6 @@ class NationalTitleScene(Scene):
         self._base = load_photo(self.photo)
         self._bias = fx.smart_crop_bias(self._base)
         self._scrim = green_scrim((W, H), 175, 95, 250)
-
-        self._band = sadu_band(W, 46, seed=1)
-        self._band_y = TOP + 96
 
         # رقم العام خلف النص — حضور بلا ضجيج
         self._ghost = _numeral(self.number, 400, (*B.color("white"), 44),
@@ -316,12 +211,6 @@ class NationalTitleScene(Scene):
         img = ken_burns(self._base, t, self.duration, "zoom_in", self._bias)
         img = national_grade(img, 0.72).convert("RGBA")
         img.alpha_composite(self._scrim)
-
-        # شريط السدو ينفتح من المنتصف إلى الطرفين
-        p_band = mo.ease_out_quint(mo.window(t, 0.35, 0.85))
-        bw = max(2, int(W * p_band))
-        band = self._band.crop(((W - bw) // 2, 0, (W - bw) // 2 + bw, self._band.height))
-        paste_alpha(img, band, ((W - bw) // 2, self._band_y), min(1.0, p_band * 1.6))
 
         p_ghost = mo.ease_out_cubic(mo.window(t, 0.55, 1.1))
         paste_alpha(img, self._ghost,
@@ -391,8 +280,6 @@ class SplitScene(Scene):
     _bg: Image.Image = field(default=None, repr=False)
     _mask: Image.Image = field(default=None, repr=False)
     _edge: Image.Image = field(default=None, repr=False)
-    _band: Image.Image = field(default=None, repr=False)
-    _band_y: int = 0
     _title: list = field(default_factory=list, repr=False)
     _body: list = field(default_factory=list, repr=False)
     _text_rule: Image.Image = field(default=None, repr=False)
@@ -418,9 +305,6 @@ class SplitScene(Scene):
 
         self._edge = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         ImageDraw.Draw(self._edge).line([(0, left), (W, right)], fill=(*gold, 235), width=6)
-
-        self._band = sadu_band(W, 40, seed=3)
-        self._band_y = H - BOTTOM + 96
 
         text_top = max(left, right) + 88
         max_w = W - SIDE * 2 - 46
@@ -479,7 +363,7 @@ class SplitScene(Scene):
         photo = layer
 
         # الكشف يمشي من اليمين لليسار مع اتجاه القراءة، وعلى حافّته خيط ذهبي
-        p = mo.ease_out_quint(mo.window(t, 0.0, 0.75))
+        p = mo.ease_out_quint(mo.window(t, 0.0, 0.95))
         vis = max(2, int(W * p))
         img.alpha_composite(photo.crop((W - vis, 0, W, H)), (W - vis, 0))
         if p < 0.999:
@@ -488,11 +372,6 @@ class SplitScene(Scene):
 
         a = mo.inout_alpha(t, self.duration, 0.5, 0.3)
         paste_alpha(img, self._edge, (0, 0), min(a, mo.ease_out_cubic(mo.window(t, 0.35, 0.6))))
-
-        p_band = mo.ease_out_cubic(mo.window(t, 0.45, 0.7))
-        bw = max(2, int(W * p_band))
-        paste_alpha(img, self._band.crop((0, 0, bw, self._band.height)),
-                    (W - bw, self._band_y), min(a, p_band))
 
         p_rule = mo.ease_out_cubic(mo.window(t, 0.40, 0.55))
         grown = max(2, int(self._text_rule.height * p_rule))
@@ -527,12 +406,7 @@ class EmblemScene(Scene):
 
     def prepare(self) -> None:
         gold = B.color("gold")
-        bg = national_backdrop((W, H)).copy()
-        top_band = sadu_band(W, 54, seed=5)
-        bot_band = sadu_band(W, 54, seed=9)
-        bg.alpha_composite(top_band, (0, TOP + 40))
-        bg.alpha_composite(bot_band, (0, H - BOTTOM + 60))
-        self._bg = bg
+        self._bg = national_backdrop((W, H))
 
         self._num = _numeral(self.number, 420, (*B.color("white"), 255), (*gold, 255), 8)
         self._label = _centered(self.label, ty.TextStyle(
@@ -608,10 +482,7 @@ class NationalOutroScene(Scene):
 
     def prepare(self) -> None:
         gold = B.color("gold")
-        bg = national_backdrop((W, H)).copy()
-        bg.alpha_composite(sadu_band(W, 48, seed=7), (0, TOP - 20))
-        bg.alpha_composite(sadu_band(W, 48, seed=11), (0, H - 150))
-        self._bg = bg
+        self._bg = national_backdrop((W, H))
 
         logo = Image.open(B.logo_mark).convert("RGBA")
         target_h = 300
