@@ -23,7 +23,8 @@ from . import motion as mo
 from . import typography as ty
 from .config import brand
 from .scenes import (BOTTOM, SIDE, TOP, H, W, FlashScene, GridScene, PhotoScene,
-                     Scene, ken_burns, load_photo, paste_alpha, tight_lines)
+                     Scene, ken_burns, load_photo, open_photo, paste_alpha,
+                     tight_lines)
 from .styles import STYLES, Style
 
 B = brand()
@@ -262,15 +263,15 @@ class NationalTitleScene(Scene):
         gold = B.color("gold")
         self._base = load_photo(self.photo)
         self._bias = fx.smart_crop_bias(self._base)
-        self._scrim = green_scrim((W, H), 155, 55, 248)
+        self._scrim = green_scrim((W, H), 175, 95, 250)
 
         self._band = sadu_band(W, 46, seed=1)
         self._band_y = TOP + 96
 
         # رقم العام خلف النص — حضور بلا ضجيج
-        self._ghost = _numeral(self.number, 460, (*B.color("white"), 34),
-                               (*gold, 120), 7)
-        self._ghost_pos = ((W - self._ghost.width) // 2, int(H * 0.30))
+        self._ghost = _numeral(self.number, 400, (*B.color("white"), 44),
+                               (*gold, 175), 8)
+        self._ghost_pos = ((W - self._ghost.width) // 2, int(H * 0.205))
 
         max_w = W - SIDE * 2
         anchor_x = W - SIDE
@@ -313,7 +314,7 @@ class NationalTitleScene(Scene):
 
     def frame(self, t: float) -> Image.Image:
         img = ken_burns(self._base, t, self.duration, "zoom_in", self._bias)
-        img = national_grade(img, 0.55).convert("RGBA")
+        img = national_grade(img, 0.72).convert("RGBA")
         img.alpha_composite(self._scrim)
 
         # شريط السدو ينفتح من المنتصف إلى الطرفين
@@ -386,7 +387,7 @@ class SplitScene(Scene):
     style: Style = field(default_factory=lambda: STYLES[0])
 
     _base: Image.Image = field(default=None, repr=False)
-    _bias: float = 0.5
+    _region_h: int = 0
     _bg: Image.Image = field(default=None, repr=False)
     _mask: Image.Image = field(default=None, repr=False)
     _edge: Image.Image = field(default=None, repr=False)
@@ -399,13 +400,18 @@ class SplitScene(Scene):
 
     def prepare(self) -> None:
         gold = B.color("gold")
-        self._base = load_photo(self.photo)
-        self._bias = fx.smart_crop_bias(self._base)
         self._bg = national_backdrop((W, H))
 
         y_hi, y_lo = int(H * 0.55), int(H * 0.64)
         left, right = (y_lo, y_hi) if not self.flip else (y_hi, y_lo)
         poly = [(0, 0), (W, 0), (W, right), (0, left)]
+
+        # الصورة تُقصّ على مقاس *منطقة الانقسام* (١٠٨٠×١٢٢٩ تقريبًا) لا على
+        # مقاس الإطار الكامل: قصّ إطار عمودي كامل ثم إخفاء نصفه يعني أننا
+        # نعرض أعلى الصورة فقط — وهو غالبًا السماء أو الجدار لا الموضوع.
+        self._region_h = max(left, right)
+        self._base = fx.cover(open_photo(self.photo),
+                              (int(W * 1.16), int(self._region_h * 1.16)))
 
         self._mask = Image.new("L", (W, H), 0)
         ImageDraw.Draw(self._mask).polygon(poly, fill=255)
@@ -445,12 +451,32 @@ class SplitScene(Scene):
                                                           fill=(*gold, 255))
         self._rule_pos = (W - SIDE - 8, text_top - 6)
 
+    def _window(self, t: float) -> Image.Image:
+        """نافذة كِن بيرنز داخل منطقة الانقسام وحدها."""
+        bw, bh = W, self._region_h
+        p = mo.ease_in_out(mo.window(t, 0, self.duration))
+        z = mo.lerp(1.16, 1.02, p) if self.move == "zoom_out" else mo.lerp(1.02, 1.16, p)
+        win_w = min(self._base.width, max(bw, int(round(bw * 1.16 / z))))
+        win_h = min(self._base.height, max(bh, int(round(bh * 1.16 / z))))
+
+        if self.move == "pan_left":
+            fx_ = mo.lerp(0.88, 0.12, p)
+        elif self.move == "pan_right":
+            fx_ = mo.lerp(0.12, 0.88, p)
+        else:
+            fx_ = 0.5
+        x0 = int((self._base.width - win_w) * fx_)
+        y0 = int((self._base.height - win_h) * 0.5)
+        return self._base.crop((x0, y0, x0 + win_w, y0 + win_h)).resize((bw, bh), Image.BICUBIC)
+
     def frame(self, t: float) -> Image.Image:
         img = self._bg.copy()
 
-        photo = ken_burns(self._base, t, self.duration, self.move, self._bias)
-        photo = national_grade(photo, 0.5).convert("RGBA")
-        photo.putalpha(self._mask)
+        photo = national_grade(self._window(t), 0.40).convert("RGBA")
+        layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        layer.paste(photo, (0, 0))
+        layer.putalpha(self._mask)
+        photo = layer
 
         # الكشف يمشي من اليمين لليسار مع اتجاه القراءة، وعلى حافّته خيط ذهبي
         p = mo.ease_out_quint(mo.window(t, 0.0, 0.75))

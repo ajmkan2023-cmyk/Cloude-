@@ -55,8 +55,8 @@ def tight_lines(block: ty.TextBlock, origin: tuple[int, int]) -> list[tuple[Imag
     return out
 
 
-def load_photo(path: str | Path) -> Image.Image:
-    """يحمّل صورة، يصحّح دورانها، ويجهّزها بمقاس عمودي مع هامش للحركة."""
+def open_photo(path: str | Path) -> Image.Image:
+    """يفتح الصورة بدورانها الصحيح دون أي قصّ — الأساس لكل قصّ لاحق."""
     img = Image.open(path)
     try:  # احترام معلومات EXIF للاتجاه
         from PIL import ImageOps
@@ -64,8 +64,12 @@ def load_photo(path: str | Path) -> Image.Image:
         img = ImageOps.exif_transpose(img)
     except Exception:
         pass
-    img = img.convert("RGB")
-    return fx.cover(img, (int(W * ZMAX), int(H * ZMAX)))
+    return img.convert("RGB")
+
+
+def load_photo(path: str | Path) -> Image.Image:
+    """يحمّل صورة، يصحّح دورانها، ويجهّزها بمقاس عمودي مع هامش للحركة."""
+    return fx.cover(open_photo(path), (int(W * ZMAX), int(H * ZMAX)))
 
 
 def ken_burns(base: Image.Image, t: float, duration: float, move: str, bias: float = 0.5) -> Image.Image:

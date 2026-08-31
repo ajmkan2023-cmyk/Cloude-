@@ -225,7 +225,7 @@ def write_track(path: str | Path, seconds: float, mood: str) -> Path:
 
 
 def mix_voice(music: str | Path, voice: str | Path, out: str | Path,
-              delay: float = 0.0, music_gain: float = 0.52) -> Path:
+              delay: float = 0.0, music_gain: float = 0.62) -> Path:
     """يمزج التعليق الصوتي فوق الموسيقى مع خفضها تلقائيًا تحت الكلام.
 
     الخفض ليس ثابتًا: `sidechaincompress` يجعل صوت المعلّق نفسه هو ما يكبس
@@ -242,11 +242,15 @@ def mix_voice(music: str | Path, voice: str | Path, out: str | Path,
     ms = max(0, int(round(delay * 1000)))
 
     chain = (
-        f"[1:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,"
-        f"adelay={ms}|{ms},loudnorm=I=-16:TP=-1.5:LRA=11,asplit=2[vo][key];"
-        f"[0:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,"
+        # aresample بعد loudnorm ضروري: المرشّح يُخرج ١٩٢ كيلوهرتز افتراضيًا،
+        # فلولاه تتفاوض بقية السلسلة على تردّد غريب ويُقتطع الصوت.
+        f"[1:a]aformat=sample_fmts=fltp:sample_rates={SR}:channel_layouts=stereo,"
+        f"adelay={ms}|{ms},loudnorm=I=-16:TP=-1.5:LRA=11,"
+        f"aresample={SR},aformat=sample_fmts=fltp:sample_rates={SR}:"
+        f"channel_layouts=stereo,asplit=2[vo][key];"
+        f"[0:a]aformat=sample_fmts=fltp:sample_rates={SR}:channel_layouts=stereo,"
         f"volume={music_gain}[bed];"
-        f"[bed][key]sidechaincompress=threshold=0.03:ratio=12:attack=20:release=380[duck];"
+        f"[bed][key]sidechaincompress=threshold=0.03:ratio=9:attack=20:release=300[duck];"
         f"[duck][vo]amix=inputs=2:duration=first:normalize=0[mixed];"
         f"[mixed]alimiter=limit=0.94[out]"
     )
@@ -254,7 +258,7 @@ def mix_voice(music: str | Path, voice: str | Path, out: str | Path,
         imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-loglevel", "error",
         "-i", str(music), "-i", str(voice),
         "-filter_complex", chain, "-map", "[out]",
-        "-c:a", "aac", "-b:a", "192k", str(out),
+        "-ar", str(SR), "-c:a", "aac", "-b:a", "192k", str(out),
     ]
     proc = subprocess.run(cmd, capture_output=True)
     if proc.returncode != 0:
