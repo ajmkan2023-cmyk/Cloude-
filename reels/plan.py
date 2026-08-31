@@ -177,9 +177,17 @@ def build_timeline(plan: Plan):
     تحدّد النبرة وحركة الكاميرا، والتصميم يحدّد الشكل. الثلاثة مستقلّة، فلا
     تتكرّر حلقة بعينها.
     """
+    from .national import (EmblemScene, NationalOutroScene, NationalTitleScene,
+                           SplitScene)
     from .scenes import (FlashScene, GridScene, InsetScene, OutroScene,
                          PhotoScene, TextCardScene, TitleScene)
     from .timeline import Timeline
+
+    if plan.pattern_obj.skin == "national":
+        from . import national as nat
+        FlashScene, PhotoScene, GridScene = (nat.NationalFlashScene,
+                                             nat.NationalPhotoScene,
+                                             nat.NationalGridScene)
 
     c, st, pat = plan.concept_obj, plan.style_obj, plan.pattern_obj
     shots, cards = list(plan.shots), list(plan.text_cards)
@@ -197,6 +205,31 @@ def build_timeline(plan: Plan):
         elif slot.kind == "outro":
             scenes.append(OutroScene(cta=plan.cta, duration=slot.seconds,
                                      style=st, photo=plan.hero_photo))
+
+        elif slot.kind == "national_title":
+            scenes.append(NationalTitleScene(
+                photo=plan.hero_photo, kicker=plan.kicker or c.kicker,
+                headline=plan.headline, subline=plan.subline,
+                number=plan.topic, duration=slot.seconds, style=st))
+
+        elif slot.kind == "national_outro":
+            scenes.append(NationalOutroScene(cta=plan.cta, duration=slot.seconds, style=st))
+
+        elif slot.kind == "emblem":
+            line = cards[ci] if ci < len(cards) else plan.subline
+            ci += 1
+            scenes.append(EmblemScene(number=plan.topic, line=line,
+                                      duration=slot.seconds, style=st))
+
+        elif slot.kind == "split":
+            shot = shots[si] if si < len(shots) else shots[-1]
+            si += 1
+            move = shot.move or c.moves[mi % len(c.moves)]
+            mi += 1
+            scenes.append(SplitScene(
+                photo=shot.photo, title=shot.title, body=shot.body, move=move,
+                flip=bool(len([s for s in scenes if isinstance(s, SplitScene)]) % 2),
+                duration=slot.seconds, style=st))
 
         elif slot.kind == "text":
             line = cards[ci] if ci < len(cards) else plan.subline

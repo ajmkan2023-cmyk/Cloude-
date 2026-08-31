@@ -75,9 +75,17 @@ MOODS: dict[str, dict] = {
         "pad_cut": 1350, "arp_cut": 2600, "pulse": True,
         "arp_gain": 0.068, "pad_gain": 0.25, "reverb": 0.50, "detune": 0.0024,
     },
+    "anthem": {  # فخور واسع — لإعلانات المناسبات الوطنية
+        "name_ar": "فخر",
+        "bpm": 68,
+        "roots": [(293.66, "maj"), (220.00, "maj"), (246.94, "min"), (196.00, "maj")],
+        "pad_cut": 1450, "arp_cut": 3000, "pulse": True,
+        "arp_gain": 0.088, "pad_gain": 0.25, "reverb": 0.46, "detune": 0.0018,
+    },
 }
 
-MOOD_KEYS = tuple(MOODS)
+# الدوران الدوري لا يشمل أمزجة المناسبات — «فخر» يُطلب بالاسم فقط
+MOOD_KEYS = tuple(k for k in MOODS if k != "anthem")
 
 
 def next_mood(cycle: int) -> str:

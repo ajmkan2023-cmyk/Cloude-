@@ -19,6 +19,9 @@
     "sky": "#4FB3E8",
     "sun": "#F7A81B",
     "sand": "#F6E7CE",
+    "green": "#006C35",
+    "green_deep": "#00301A",
+    "gold": "#C9A227",
     "white": "#FFFFFF"
   },
   "fonts": {

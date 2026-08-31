@@ -110,6 +110,12 @@ def ken_burns(base: Image.Image, t: float, duration: float, move: str, bias: flo
 class Scene:
     duration: float = 4.0
 
+    # خطّافات الجلد: الافتراضي هوية أجمكان الزرقاء، وحزمة المناسبة
+    # (`national.py`) تستبدلها بالأخضر دون نسخ المشاهد كلها.
+    grade_fn = staticmethod(fx.grade)
+    scrim_fn = staticmethod(fx.scrim)
+    bg_color = "ink"
+
     def prepare(self) -> None:  # pragma: no cover - يُنفَّذ في الأبناء
         ...
 
@@ -256,11 +262,11 @@ class PhotoScene(Scene):
         st = self.style
         self._base = load_photo(self.photo)
         self._bias = fx.smart_crop_bias(self._base)
-        self._scrim = fx.scrim((W, H), *st.scrim_photo)
+        self._scrim = self.scrim_fn((W, H), *st.scrim_photo)
         accent = B.color(st.accent)
 
         mid = ken_burns(self._base, self.duration / 2, self.duration, self.move, self._bias)
-        mid = fx.grade(mid, st.grade).convert("RGBA")
+        mid = self.grade_fn(mid, st.grade).convert("RGBA")
 
         max_w = W - SIDE * 2
         # «bare» بلا لوحة فيتنفّس النص أكثر؛ الباقي داخل لوحة لها حشوة
@@ -385,7 +391,7 @@ class PhotoScene(Scene):
 
     def frame(self, t: float) -> Image.Image:
         img = ken_burns(self._base, t, self.duration, self.move, self._bias)
-        img = fx.grade(img, self.style.grade).convert("RGBA")
+        img = self.grade_fn(img, self.style.grade).convert("RGBA")
         img.alpha_composite(self._scrim)
 
         a = mo.inout_alpha(t, self.duration, fade_in=0.55, fade_out=0.35)
@@ -583,9 +589,9 @@ class GridScene(Scene):
         self._cells = []
         for path, size in zip(self.photos[: len(self._boxes)], sizes):
             img = fx.cover(load_photo(path), size)
-            self._cells.append(fx.grade(img, st.grade).convert("RGBA"))
+            self._cells.append(self.grade_fn(img, st.grade).convert("RGBA"))
 
-        self._bg = Image.new("RGBA", (W, H), (*B.color("ink"), 255))
+        self._bg = Image.new("RGBA", (W, H), (*B.color(self.bg_color), 255))
 
         max_w = W - SIDE * 2
         accent = B.color(st.accent)
@@ -642,7 +648,7 @@ class FlashScene(Scene):
     def prepare(self) -> None:
         st = self.style
         self._frames = [
-            fx.grade(fx.cover(load_photo(p), (W, H)), st.grade).convert("RGBA")
+            self.grade_fn(fx.cover(load_photo(p), (W, H)), st.grade).convert("RGBA")
             for p in self.photos
         ]
         if self.kicker:
@@ -665,7 +671,7 @@ class FlashScene(Scene):
         img = base.resize((zw, zh), Image.BILINEAR).crop(
             ((zw - W) // 2, (zh - H) // 2, (zw - W) // 2 + W, (zh - H) // 2 + H)
         )
-        img.alpha_composite(fx.scrim((W, H), 90, 30, 150))
+        img.alpha_composite(self.scrim_fn((W, H), 90, 30, 150))
 
         for layer, (x, y) in self._kicker:
             paste_alpha(img, layer, (x, y), mo.inout_alpha(t, self.duration, 0.35, 0.3))

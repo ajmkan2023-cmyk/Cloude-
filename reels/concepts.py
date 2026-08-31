@@ -173,7 +173,33 @@ CONCEPTS: tuple[Concept, ...] = (
 )
 
 
-CONCEPT_BY_KEY = {c.key: c for c in CONCEPTS}
+# أفكار المناسبات — خارج الدوران السنوي لأنها مرتبطة بتاريخ بعينه.
+# `topic` هنا ليس زاوية الحلقة بل *رقم* المناسبة (٩٦ لليوم الوطني ٢٠٢٦م)،
+# لأن مشاهد `national.py` ترسمه رقمًا ضخمًا في الافتتاح وبطاقة المناسبة.
+OCCASION_CONCEPTS: tuple[Concept, ...] = (
+    Concept(
+        key="national_day",
+        name_ar="اليوم الوطني",
+        kicker="اليوم الوطني السعودي",
+        headline_template="{topic} عامًا\nوالفرحة على بحرنا",
+        scene_count=7,
+        title_scene_seconds=3.8,
+        photo_scene_seconds=3.2,
+        outro_seconds=4.4,
+        moves=("zoom_out", "pan_left", "rise", "zoom_in", "pan_right"),
+        caption_opener="نحتفل باليوم الوطني السعودي على بحر الخبر 🇸🇦",
+        hashtags=BASE_TAGS + ("اليوم_الوطني_السعودي", "اليوم_الوطني_96", "السعودية"),
+        guidance=(
+            "نبرة فخر هادئة لا صراخ. لا تُوصف الدولة بما لا يظهر في الصور: "
+            "النص يبقى عن أجمكان والمناسبة، لا عن مشاهد وطنية غير مصوّرة. "
+            "ممنوع رسم العلم أو شعار الدولة — الأخضر ونقش السدو يكفيان."
+        ),
+        topic_hint="٩٦",
+    ),
+)
+
+
+CONCEPT_BY_KEY = {c.key: c for c in CONCEPTS + OCCASION_CONCEPTS}
 
 
 def next_concept(cycle: int) -> Concept:

@@ -13,7 +13,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 # أنواع المشاهد المتاحة
-KINDS = ("title", "photo", "grid", "flash", "text", "inset", "outro")
+KINDS = ("title", "photo", "grid", "flash", "text", "inset", "outro",
+         # مشاهد المناسبات (اليوم الوطني) — انظر `national.py`
+         "national_title", "split", "emblem", "national_outro")
+
+# أول خانة وآخر خانة: افتتاح وختام، أيًّا كان طرازهما
+OPENERS = ("title", "national_title")
+CLOSERS = ("outro", "national_outro")
 
 
 @dataclass(frozen=True)
@@ -29,15 +35,17 @@ class Pattern:
     name_ar: str
     slots: tuple[Slot, ...]
     note: str              # ما الذي يميّز إيقاع هذا النمط
+    skin: str = "brand"    # brand = أزرق أجمكان، national = أخضر المناسبة
 
     @property
     def photo_count(self) -> int:
         """عدد الصور المطلوبة عدا صورة الافتتاح."""
-        return sum(s.photos for s in self.slots if s.kind not in ("title", "outro"))
+        return sum(s.photos for s in self.slots
+                   if s.kind not in OPENERS + CLOSERS)
 
     @property
     def text_count(self) -> int:
-        return sum(1 for s in self.slots if s.kind == "text")
+        return sum(1 for s in self.slots if s.kind in ("text", "emblem"))
 
     @property
     def total_seconds(self) -> float:
@@ -49,8 +57,8 @@ class Pattern:
                 raise ValueError(f"نوع مشهد غير معروف: {s.kind}")
             if not 0.8 <= s.seconds <= 6.0:
                 raise ValueError(f"مدّة خانة خارج المدى (٠٫٨–٦): {s.seconds}")
-        if self.slots[0].kind != "title" or self.slots[-1].kind != "outro":
-            raise ValueError("كل نمط يبدأ بـ title وينتهي بـ outro")
+        if self.slots[0].kind not in OPENERS or self.slots[-1].kind not in CLOSERS:
+            raise ValueError("كل نمط يبدأ بمشهد افتتاح وينتهي بمشهد ختام")
 
 
 PATTERNS: tuple[Pattern, ...] = (
@@ -129,8 +137,33 @@ PATTERNS: tuple[Pattern, ...] = (
 )
 
 
-PATTERN_BY_KEY = {p.key: p for p in PATTERNS}
-for _p in PATTERNS:
+# أنماط المناسبات — خارج الدوران الدوري لأنها تخصّ تاريخًا بعينه، ولا يصحّ
+# أن تظهر في حلقة عادية في منتصف الشتاء.
+OCCASIONS: tuple[Pattern, ...] = (
+    Pattern(
+        key="national",
+        name_ar="الوطني",
+        skin="national",
+        note=(
+            "إعلان مناسبة: ستارة خضراء تنفتح عن الصورة، انقسامات قطرية بحافّة "
+            "ذهبية، بطاقة رقم اليوم الوطني، ثم ختام بتهنئة"
+        ),
+        slots=(
+            Slot("national_title", 3.8, 1),
+            Slot("flash", 2.2, 4),
+            Slot("split", 3.4),
+            Slot("emblem", 3.0, 0),
+            Slot("split", 3.4),
+            Slot("photo", 2.8),
+            Slot("grid", 3.2, 4),
+            Slot("national_outro", 4.4, 0),
+        ),
+    ),
+)
+
+
+PATTERN_BY_KEY = {p.key: p for p in PATTERNS + OCCASIONS}
+for _p in PATTERNS + OCCASIONS:
     _p.validate()
 
 

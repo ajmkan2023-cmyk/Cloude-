@@ -17,7 +17,7 @@ CHOICES: dict[str, tuple] = {
     "caption": ("glass", "band", "bare", "ribbon", "corner"),
     "title_layout": ("bottom", "center", "upper"),
     "number": ("chip", "big", "text", "none"),
-    "accent": ("sun", "sky", "sand"),
+    "accent": ("sun", "sky", "sand", "green", "gold"),
     "outro_bg": ("brand", "photo"),
     "progress": ("bar", "dots", "none"),
     "watermark": ("top_right", "top_left", "none"),
