@@ -26,24 +26,70 @@
     "body_size": 38,
     "radius": 26
   },
-  "design_note": "هوية المناسبة لا هوية الحلقات: أخضر رسمي بدل أزرق العلامة، ستارة تنفتح في الافتتاح، انقسامات قطرية بحافّة ذهبية، ونقش سدو مرسوم برمجيًا بدل الألواح الزجاجية. بلا شريط تقدّم وبلا علامة مائية ليبقى الإطار نظيفًا كإعلان لا كحلقة.",
+  "design_note": "هوية المناسبة لا هوية الحلقات: أخضر رسمي بدل أزرق العلامة، ستارة تنفتح في الافتتاح، انقسامات قطرية بحافّة ذهبية، ونقش سدو مرسوم برمجيًا بدل الألواح الزجاجية. بلا شريط تقدّم وبلا علامة مائية ليبقى الإطار نظيفًا كإعلان لا كحلقة. وتعليق صوتي خليجي فوق الموسيقى، تنخفض تحته تلقائيًا وترجع بين الجمل.",
   "shots": [
-    { "photo": "assets/incoming/drive/DSC03276.jpg", "title": "٩٦ عامًا من الفخر", "body": "" },
-    { "photo": "assets/incoming/drive/DSC02176.JPG", "title": "مجلس واسع", "body": "" },
-    { "photo": "assets/incoming/drive/DSC03524.jpg", "title": "مدخل يليق بك", "body": "" },
-    { "photo": "assets/incoming/drive/DSC02170.JPG", "title": "ارتفاع ورخام", "body": "" },
-    { "photo": "assets/incoming/drive/DSC02181.JPG", "title": "الماء من نافذتك", "body": "نخيل ونوافذ عريضة تفتح على الماء" },
-    { "photo": "assets/incoming/drive/DSC03270.jpg", "title": "مسبح تحت النخيل", "body": "ليالٍ هادئة بإضاءة دافئة" },
-    { "photo": "assets/incoming/drive/DSC03144.jpg", "title": "سريرٌ يطلّ على البحر", "body": "نوافذ من الأرض للسقف" },
-    { "photo": "assets/incoming/drive/DSC02171.JPG", "title": "كل تفصيلة جاهزة", "body": "مساحات مجهّزة بالكامل" },
-    { "photo": "assets/incoming/drive/DSC02220.JPG", "title": "حمّام أنيق", "body": "" },
-    { "photo": "assets/incoming/drive/DSC02183.JPG", "title": "أجهزة مدمجة", "body": "" },
-    { "photo": "assets/incoming/drive/DSC03525.jpg", "title": "مغسلة ومرايا", "body": "" }
+    {
+      "photo": "assets/incoming/drive/DSC03276.jpg",
+      "title": "٩٦ عامًا من الفخر",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02176.JPG",
+      "title": "مجلس واسع",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03524.jpg",
+      "title": "مدخل يليق بك",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02170.JPG",
+      "title": "ارتفاع ورخام",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02181.JPG",
+      "title": "الماء من نافذتك",
+      "body": "نخيل ونوافذ عريضة تفتح على الماء"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03270.jpg",
+      "title": "مسبح تحت النخيل",
+      "body": "ليالٍ هادئة بإضاءة دافئة"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03144.jpg",
+      "title": "سريرٌ يطلّ على البحر",
+      "body": "نوافذ من الأرض للسقف"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02171.JPG",
+      "title": "كل تفصيلة جاهزة",
+      "body": "مساحات مجهّزة بالكامل"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02220.JPG",
+      "title": "حمّام أنيق",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02183.JPG",
+      "title": "أجهزة مدمجة",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03525.jpg",
+      "title": "مغسلة ومرايا",
+      "body": ""
+    }
   ],
   "caption": "وطنٌ نفخر به، وبحرٌ نحتفل عليه 🇸🇦\nاليوم الوطني السعودي الـ٩٦ — وأجمكان تستقبلكم في الخبر: شاليهات بإطلالة على الماء، مسبح بين النخيل، ومساحات عائلية مجهّزة بالكامل.\n\nكل عام ووطننا بخير 🌴\nللحجز والاستفسار: 0535516054",
   "hashtags": "",
   "hero_photo": "assets/incoming/drive/DSC02189.JPG",
   "audio": "",
   "music_mood": "anthem",
-  "created": "2026-08-31"
+  "created": "2026-08-31",
+  "voice": "assets/voice/national-96-vo.mp3",
+  "voice_delay": 0.35
 }

@@ -64,6 +64,19 @@ def cmd_build(path: str, out: str | None = None) -> None:
         print(f"♪ موسيقى «{MOODS[plan.music_mood]['name_ar']}» "
               f"بطول {timeline.duration:.1f} ثانية: {audio}")
 
+    if plan.voice:
+        from .music import mix_voice
+
+        if not Path(plan.voice).exists():
+            _fail(f"ملف التعليق الصوتي غير موجود: {plan.voice}")
+        if audio:
+            audio = mix_voice(audio, plan.voice,
+                              out_path.with_name(f"{stem}-mix.m4a"),
+                              delay=plan.voice_delay)
+            print(f"🎙 مزج التعليق فوق الموسيقى (إزاحة {plan.voice_delay:.2f}ث): {audio}")
+        else:
+            audio = plan.voice
+
     render(timeline, out_path, audio=audio)
     render_poster(timeline, out_path.with_suffix(".jpg"), at=plan.concept_obj.title_scene_seconds * 0.75)
     caption_file = out_path.with_suffix(".txt")
