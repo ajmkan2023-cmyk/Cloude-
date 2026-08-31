@@ -1,0 +1,72 @@
+{
+  "cycle": 4,
+  "concept": "guide",
+  "topic": "أجمكان",
+  "headline": "قبل ما تحجز\nخمس خطوات سريعة",
+  "kicker": "قبل ما تجي",
+  "subline": "رتّب يومك من أول ما توصل البحر",
+  "cta": "احجز إقامتك الآن",
+  "pattern": "gallery",
+  "text_cards": [],
+  "style": "editorial",
+  "design": {
+    "caption": "glass",
+    "title_layout": "center",
+    "number": "chip",
+    "accent": "sky",
+    "outro_bg": "photo",
+    "progress": "dots",
+    "watermark": "top_left",
+    "transition": "zoom",
+    "transition_seconds": 0.5,
+    "grade": 1.12,
+    "title_size": 96,
+    "caption_title_size": 60,
+    "body_size": 38,
+    "radius": 22,
+    "scrim_photo": [
+      95,
+      28,
+      212
+    ],
+    "scrim_title": [
+      150,
+      62,
+      232
+    ]
+  },
+  "design_note": "خمس لقطات أفقية جديدة (جلسات ومسبح) لا تحتمل القصّ العمودي الكامل، فاخترت «المعرض»: الصورة داخل إطار بهامش فتبقى كما صُوّرت. العنوان متمركز فوق زجاج الواجهة، وشارة زرقاء ترقّم الخطوة على زاوية كل إطار، ونقاط بدل شريط التقدّم لأن الشريط كان يُقرأ خطًّا شاردًا. تدرّج مرفوع لأن نبرة الدليل نهارية.",
+  "shots": [
+    {
+      "photo": "assets/incoming/drive/DSC02195.JPG",
+      "title": "اختر جلستك برّا",
+      "body": "كنب ومقاعد وطاولة أمام جدار مزخرف"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02194.JPG",
+      "title": "جرّب المسبح",
+      "body": "حوض واسع تنعكس عليه إضاءة الواجهة"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02175.JPG",
+      "title": "جهّز فطورك",
+      "body": "مطبخ بجزيرة ومقاعد عالية"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03153.jpg",
+      "title": "نم على البحر",
+      "body": "نافذة كبيرة تفتح على الماء"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02193.JPG",
+      "title": "صوّر عند الماء",
+      "body": "الحوض والواجهة يعطونك أفضل لقطة"
+    }
+  ],
+  "caption": "خمس خطوات تخليك تستفيد من كل ساعة في أجمكان 📌\nجلسة برّا، مسبح، مطبخ جاهز، غرفة على البحر، وأفضل زاوية تصوير — كلها في مكان واحد على بحر الخبر.\n\nاحفظ المنشور لزيارتك الجاية.\nللحجز والاستفسار: 0535516054",
+  "hashtags": "",
+  "hero_photo": "assets/incoming/drive/DSC02197.JPG",
+  "audio": "",
+  "music_mood": "breeze",
+  "created": "2026-08-31"
+}

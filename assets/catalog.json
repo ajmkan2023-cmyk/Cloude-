@@ -441,5 +441,57 @@
     "time": "نهار",
     "quality": "جيدة",
     "vertical_ok": true
+  },
+  "DSC02193.JPG": {
+    "path": "assets/incoming/drive/DSC02193.JPG",
+    "tags": [
+      "مسبح",
+      "مبنى"
+    ],
+    "description": "مسبح خارجي عند المغيب وواجهة حجرية بنوافذ زجاجية مضاءة من الداخل",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02194.JPG": {
+    "path": "assets/incoming/drive/DSC02194.JPG",
+    "tags": [
+      "مسبح",
+      "مبنى"
+    ],
+    "description": "مسبح خارجي بمستوى الماء ودرابزين وواجهة زجاجية تظهر الإضاءة الداخلية",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02195.JPG": {
+    "path": "assets/incoming/drive/DSC02195.JPG",
+    "tags": [
+      "جلسة",
+      "نخيل",
+      "مبنى"
+    ],
+    "description": "جلسة خارجية بكنب ومقاعد وطاولة زجاجية أمام جدار مزخرف وواجهة زجاجية ينعكس فيها النخيل",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02197.JPG": {
+    "path": "assets/incoming/drive/DSC02197.JPG",
+    "tags": [
+      "جلسة",
+      "نخيل",
+      "بحر",
+      "مسبح",
+      "مبنى"
+    ],
+    "description": "تراس خارجي بكنب ومقاعد، ونخيل وبحر مفتوح على اليمين ومسبح بجواره",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
   }
 }

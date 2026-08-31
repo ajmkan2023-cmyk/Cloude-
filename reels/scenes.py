@@ -744,6 +744,8 @@ class InsetScene(Scene):
     _mask: Image.Image = field(default=None, repr=False)
     _title: list = field(default_factory=list, repr=False)
     _body: list = field(default_factory=list, repr=False)
+    _number: Image.Image = field(default=None, repr=False)
+    _number_pos: tuple[int, int] = (0, 0)
 
     def prepare(self) -> None:
         st = self.style
@@ -753,7 +755,9 @@ class InsetScene(Scene):
 
         img = load_photo(self.photo)
         self._bias = fx.smart_crop_bias(img)
-        self._base = fx.cover(img, (int(bw * 1.16), int(bh * 1.16)))
+        # التدرّج يُطبَّق مرّة في التحضير لا في كل إطار: النافذة داخل الإطار
+        # ثابتة الحجم، فلا داعي لإعادة حساب التدرّج ثلاثين مرّة في الثانية.
+        self._base = self.grade_fn(fx.cover(img, (int(bw * 1.16), int(bh * 1.16))), st.grade)
         self._bg = fx.brand_backdrop((W, H))
         self._mask = fx.rounded_mask((bw, bh), st.radius or 18)
 
@@ -777,6 +781,39 @@ class InsetScene(Scene):
             b_block = ty.wrap(self.body, b_style)
             self._body = tight_lines(b_block, (W - margin_x, text_top + t_block.height + 16))
 
+        self._number, self._number_pos = self._build_number(st, top, height, margin_x)
+
+    def _build_number(self, st, top: int, height: int, margin_x: int):
+        """الترقيم داخل الإطار — بدونه يبدو «المعرض» صورًا متتالية بلا ترتيب."""
+        if st.number == "none":
+            return None, (0, 0)
+
+        num = f"{self.index}"
+        accent = B.color(st.accent)
+
+        if st.number == "chip":
+            chip = Image.new("RGBA", (92, 92), (0, 0, 0, 0))
+            cd = ImageDraw.Draw(chip)
+            cd.ellipse((0, 0, 91, 91), fill=(*accent, 255))
+            cd.text((46, 48), num, font=ty.font("body_bold", 46),
+                    fill=(*B.color("ink"), 255), anchor="mm")
+            # يركب على الزاوية العليا اليمنى للإطار فينتمي للصورة لا للخلفية
+            return chip, (W - margin_x - 46, top - 46)
+
+        if st.number == "big":
+            layer = Image.new("RGBA", (200, 200), (0, 0, 0, 0))
+            ImageDraw.Draw(layer).text(
+                (100, 100), num, font=ty.font("display", 150), fill=(*accent, 70),
+                anchor="mm", stroke_width=4, stroke_fill=(*accent, 200))
+            return layer, (margin_x - 60, top + height - 120)
+
+        f = ty.font("body_bold", 30)
+        label = f"{self.index:02d} / {self.total:02d}"
+        layer = Image.new("RGBA", (240, 60), (0, 0, 0, 0))
+        ImageDraw.Draw(layer).text((239, 30), label, font=f, fill=(*accent, 240),
+                                   anchor="rm", direction="ltr")
+        return layer, (W - margin_x - 239, top - 74)
+
     def frame(self, t: float) -> Image.Image:
         img = self._bg.copy()
         x0, y0, x1, y1 = self._box
@@ -795,6 +832,12 @@ class InsetScene(Scene):
         rise = mo.ease_out_quint(mo.window(t, 0.0, 0.7))
         a = mo.inout_alpha(t, self.duration, 0.45, 0.3)
         paste_alpha(img, cell, (x0, y0 + int(30 * (1 - rise))), a)
+
+        if self._number is not None:
+            q = mo.ease_out_back(mo.window(t, 0.30, 0.6), overshoot=1.1)
+            paste_alpha(img, self._number,
+                        (self._number_pos[0], self._number_pos[1] + int(20 * (1 - q))),
+                        min(a, mo.ease_out_cubic(mo.window(t, 0.30, 0.45))))
 
         for i, (layer, (lx, ly)) in enumerate(self._title):
             q = mo.ease_out_cubic(mo.window(t, 0.20 + i * 0.08, 0.6))
