@@ -493,5 +493,107 @@
     "time": "نهار",
     "quality": "جيدة",
     "vertical_ok": true
+  },
+  "DSC02186.JPG": {
+    "path": "assets/incoming/drive/DSC02186.JPG",
+    "tags": [
+      "حمام"
+    ],
+    "description": "حمّام رخامي بمغسلتين ونافذة بستارة ونبتة",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02187.JPG": {
+    "path": "assets/incoming/drive/DSC02187.JPG",
+    "tags": [
+      "صالة",
+      "مبنى"
+    ],
+    "description": "مدخل داخلي بباب خشبي ومشجب ومقعد — تظهر فيه معدّات إطفاء على الجدار",
+    "people": false,
+    "time": "نهار",
+    "quality": "متوسطة",
+    "vertical_ok": true
+  },
+  "DSC02188.JPG": {
+    "path": "assets/incoming/drive/DSC02188.JPG",
+    "tags": [
+      "صالة",
+      "طبيعة"
+    ],
+    "description": "ممرّ داخلي بنباتات خضراء وفاصل خشبي — تظهر فيه معدّات إطفاء",
+    "people": false,
+    "time": "نهار",
+    "quality": "متوسطة",
+    "vertical_ok": true
+  },
+  "DSC02190.JPG": {
+    "path": "assets/incoming/drive/DSC02190.JPG",
+    "tags": [
+      "مسبح",
+      "بحر",
+      "نخيل",
+      "مبنى"
+    ],
+    "description": "مسبح خارجي والبحر خلفه مباشرة مع نخيل وواجهة بحرية على الضفة المقابلة",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02191.JPG": {
+    "path": "assets/incoming/drive/DSC02191.JPG",
+    "tags": [
+      "مسبح",
+      "بحر",
+      "نخيل"
+    ],
+    "description": "مسبح بمياه زرقاء ودرابزين، والبحر ممتدّ خلفه ونخلة على اليمين",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02192.JPG": {
+    "path": "assets/incoming/drive/DSC02192.JPG",
+    "tags": [
+      "مسبح",
+      "مبنى",
+      "طبيعة"
+    ],
+    "description": "مسبح ملاصق لواجهة الشاليه الزجاجية مع نباتات وجدار مزخرف",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02196.JPG": {
+    "path": "assets/incoming/drive/DSC02196.JPG",
+    "tags": [
+      "مبنى",
+      "مسبح",
+      "نخيل"
+    ],
+    "description": "واجهة الشاليه من الخارج بشرفة علوية ونخيل والمسبح على اليمين",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02199.JPG": {
+    "path": "assets/incoming/drive/DSC02199.JPG",
+    "tags": [
+      "صالة",
+      "مطبخ",
+      "جلسة",
+      "مسبح"
+    ],
+    "description": "مساحة داخلية واسعة تجمع المطبخ وطاولة الطعام والجلوس، وفاصل مزخرف يطلّ على المسبح",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
   }
 }
