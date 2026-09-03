@@ -160,6 +160,40 @@
       "created": "2026-08-31"
     },
     {
+      "cycle": 5,
+      "concept": "reasons",
+      "topic": "أجمكان",
+      "headline": "أربعة أسباب\nتشوفها بعينك",
+      "caption_opener": "أربعة أسباب تشوفها بعينك قبل ما تقارن بأي مكان ثاني 🌊",
+      "shot_titles": [
+        "البحر خلف المسبح",
+        "مساحة واحدة تجمعكم",
+        "تصحى على الماء",
+        "الواجهة من برّا"
+      ],
+      "photos": [
+        "DSC02190.JPG",
+        "DSC02199.JPG",
+        "DSC02233.JPG",
+        "DSC02196.JPG",
+        "DSC02192.JPG"
+      ],
+      "design": {
+        "caption": "ribbon",
+        "title_layout": "upper",
+        "number": "text",
+        "accent": "sand",
+        "outro_bg": "brand",
+        "progress": "none",
+        "watermark": "top_right",
+        "transition": "slide"
+      },
+      "pattern": "chapters",
+      "music_mood": "sunset",
+      "design_note": "أربعة أسباب بإيقاع متأمّل لا قائمة سريعة: نمط «الفصول» يفصل بينها ببطاقتين نصّيتين فيأخذ كل سبب وقته، والانتقال انزلاقي مع اتجاه القراءة كطيّ صفحة. لوحة الشريط الضيّقة تحتضن النص فقط فتترك الصور الخارجية مكشوفة. اختيار الصور تمّ بعد فحص قصّ ٩:١٦ لكل واحدة: ما لا يبقى في القصّ لا يُذكر في النص.",
+      "created": "2026-09-03"
+    },
+    {
       "cycle": 901,
       "concept": "national_day",
       "topic": "٩٦",

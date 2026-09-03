@@ -1,0 +1,70 @@
+{
+  "cycle": 5,
+  "concept": "reasons",
+  "topic": "أجمكان",
+  "headline": "أربعة أسباب\nتشوفها بعينك",
+  "kicker": "قبل ما تقارن",
+  "subline": "مسبح ملاصق للواجهة الزجاجية",
+  "cta": "تواصل معنا للحجز",
+  "pattern": "chapters",
+  "text_cards": [
+    "القرب من البحر ما له بديل",
+    "كل شي في مكان واحد"
+  ],
+  "style": "editorial",
+  "design": {
+    "caption": "ribbon",
+    "title_layout": "upper",
+    "number": "text",
+    "accent": "sand",
+    "outro_bg": "brand",
+    "progress": "none",
+    "watermark": "top_right",
+    "transition": "slide",
+    "transition_seconds": 0.45,
+    "grade": 1.05,
+    "title_size": 100,
+    "caption_title_size": 58,
+    "body_size": 36,
+    "radius": 30,
+    "scrim_photo": [
+      90,
+      25,
+      200
+    ],
+    "scrim_title": [
+      200,
+      70,
+      212
+    ]
+  },
+  "design_note": "أربعة أسباب بإيقاع متأمّل لا قائمة سريعة: نمط «الفصول» يفصل بينها ببطاقتين نصّيتين فيأخذ كل سبب وقته، والانتقال انزلاقي مع اتجاه القراءة كطيّ صفحة. لوحة الشريط الضيّقة تحتضن النص فقط فتترك الصور الخارجية مكشوفة. اختيار الصور تمّ بعد فحص قصّ ٩:١٦ لكل واحدة: ما لا يبقى في القصّ لا يُذكر في النص.",
+  "shots": [
+    {
+      "photo": "assets/incoming/drive/DSC02190.JPG",
+      "title": "البحر خلف المسبح",
+      "body": "تسبح والماء المفتوح قدّامك"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02199.JPG",
+      "title": "مساحة واحدة تجمعكم",
+      "body": "مطبخ وطاولة وجلسة بلا جدران"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02233.JPG",
+      "title": "تصحى على الماء",
+      "body": "شرفة مفتوحة من الغرفة"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02196.JPG",
+      "title": "الواجهة من برّا",
+      "body": "درج ونخيل على جنب المبنى"
+    }
+  ],
+  "caption": "أربعة أسباب تشوفها بعينك قبل ما تقارن بأي مكان ثاني 🌊\nمسبح والبحر خلفه، مساحة وحدة تجمع المطبخ والجلسة، غرفة بشرفة على الماء، وواجهة بين النخيل — كلها في أجمكان على بحر الخبر.\n\nتواصل معنا وخلّنا نرتب لك الباقي.\nللحجز والاستفسار: 0535516054",
+  "hashtags": "",
+  "hero_photo": "assets/incoming/drive/DSC02192.JPG",
+  "audio": "",
+  "music_mood": "sunset",
+  "created": "2026-09-03"
+}
