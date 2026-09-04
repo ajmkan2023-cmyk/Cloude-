@@ -88,14 +88,22 @@ def use_preset(name: str) -> Video:
 
 # ── الخطوط ────────────────────────────────────────────────────────────
 FONTS: dict[str, str] = {
-    "naskh":      "Amiri-Regular.ttf",     # نسخ كلاسيكي — الآيات والأدعية
-    "naskh_bold": "Amiri-Bold.ttf",
-    "ruqaa":      "ArefRuqaa-Regular.ttf",  # رقعة خطّية — كشف الاسم
-    "ruqaa_bold": "ArefRuqaa-Bold.ttf",
-    "kufi":       "ReemKufi-Regular.ttf",   # كوفي معاصر — العناوين الصغيرة
-    "kufi_bold":  "ReemKufi-SemiBold.ttf",
+    # نستعليق — للاسم وحده. خطّ منحدر متّصل، ثقيل الحضور، لا يُستعمل
+    # لأكثر من كلمتين وإلّا ضاعت قراءته.
+    "nastaliq":   "Gulzar.ttf",
+    # القاهرة — كل النصّ العربي. هندسي واضح على الشاشة الصغيرة.
+    "body_light": "Cairo-Light.ttf",
+    "body":       "Cairo-Regular.ttf",
+    "body_semi":  "Cairo-SemiBold.ttf",
+    "body_bold":  "Cairo-Bold.ttf",
     "latin":      "Cormorant-Light.ttf",    # لاتيني رفيع — التاريخ والاسم
     "latin_md":   "Cormorant-Medium.ttf",
+    # محفوظة للرجوع
+    "naskh":      "Amiri-Regular.ttf",
+    "naskh_bold": "Amiri-Bold.ttf",
+    "ruqaa_bold": "ArefRuqaa-Bold.ttf",
+    "kufi":       "ReemKufi-Regular.ttf",
+    "kufi_bold":  "ReemKufi-SemiBold.ttf",
 }
 
 _SYSTEM_FALLBACK = (

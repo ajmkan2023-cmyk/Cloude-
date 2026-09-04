@@ -22,16 +22,18 @@ from .config import VIDEO, color
 from .typography import Style, fit, layout
 
 # ── سلّم الخطوط ───────────────────────────────────────────────────────
-# مقاسات معايَرة على مشاهدة الجوّال: السطر الرئيسي يملأ نحو ثلاثة أرباع
-# عرض الإطار، لأن النصّ الأنيق الصغير يضيع على شاشة صغيرة.
-KICKER = Style(role="kufi", size=52, line_spacing=1.5, pad=44)
-VERSE = Style(role="naskh", size=108, line_spacing=1.58, pad=72)
-LEAD = Style(role="naskh_bold", size=126, line_spacing=1.50, pad=80)
-BODY = Style(role="naskh", size=86, line_spacing=1.64, pad=60)
-NOTE = Style(role="kufi", size=38, line_spacing=1.5, pad=40)
-NAME = Style(role="ruqaa_bold", size=600, line_spacing=1.1, pad=150)
-CLOSING = Style(role="ruqaa_bold", size=230, line_spacing=1.2, pad=90)
-SUBNAME = Style(role="naskh", size=92, line_spacing=1.4, pad=64)
+# القاهرة أعرض من أميري بنحو الثلث عند الحجم نفسه، وأقصر حبرًا بكثير —
+# فالمقاسات أصغر وتباعد الأسطر أوسع، وإلّا خرج النصّ عريضًا مضغوطًا.
+# (‎line_spacing‎ يُضرب في ارتفاع الحبر المقيس، وحبر القاهرة ≈ ‎1.15×‎ الحجم.)
+KICKER = Style(role="body_semi", size=44, line_spacing=1.5, pad=44)
+VERSE = Style(role="body", size=86, line_spacing=1.52, pad=64)
+LEAD = Style(role="body_semi", size=100, line_spacing=1.43, pad=70)
+BODY = Style(role="body", size=68, line_spacing=1.70, pad=54)
+NOTE = Style(role="body_light", size=34, line_spacing=1.5, pad=38)
+# نستعليق: منحدر، فصندوقه أعلى بكثير من عرضه مقارنةً بالرقعة
+NAME = Style(role="nastaliq", size=360, line_spacing=1.1, pad=140)
+CLOSING = Style(role="nastaliq", size=150, line_spacing=1.2, pad=80)
+SUBNAME = Style(role="body", size=74, line_spacing=1.30, pad=56)
 LATIN = Style(role="latin", size=60, direction="ltr", language="en",
               tracking=22, line_spacing=1.4, pad=48)
 
@@ -259,7 +261,7 @@ class NameReveal(Scene):
             self.below.gap(38)
             self.below.text(self.subtitle, SUBNAME, ink["soft"], delay=2.95, max_lines=1)
         if self.latin:
-            self.below.gap(40)
+            self.below.gap(58)
             self.below.text(self.latin, LATIN, ink["faint"], delay=3.4,
                             max_lines=1, shade=False)
 

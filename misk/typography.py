@@ -197,11 +197,18 @@ def layout(text: str, style: Style) -> Block:
 
 def fit(text: str, style: Style, max_lines: int = 3, min_size: int = 24,
         step: int = 4) -> Style:
-    """يصغّر حجم الخط تدريجيًا حتى يتّسع النص في ‎max_lines‎ سطرًا."""
+    """يصغّر حجم الخط حتى يتّسع النصّ عددًا للأسطر **وعرضًا**.
+
+    شرط العرض ليس زائدًا: كلمة واحدة طويلة (اسم مثلًا) لا يمكن لفّها،
+    فتتجاوز الحدّ مهما كبرت ولا يوقفها شرط عدد الأسطر وحده.
+    """
+    limit = style.max_width or 10 ** 7
     size = style.size
     while size > min_size:
         trial = replace(style, size=size)
-        if len(_split(text, trial)) <= max_lines:
+        lines = _split(text, trial)
+        widest = max((measure(shape(line), trial)[0] for line in lines), default=0)
+        if len(lines) <= max_lines and widest <= limit:
             return trial
         size -= step
     return replace(style, size=min_size)
