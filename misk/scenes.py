@@ -81,8 +81,8 @@ class Stack:
         return self
 
     def text(self, text: str, style: Style, fill=None, *, gold: bool = False,
-             delay: float | None = None, stagger: float = 0.16,
-             rise: float = 26.0, grow: float = 1.15, max_lines: int = 4,
+             delay: float | None = None, stagger: float = 0.13,
+             rise: float = 26.0, grow: float = 0.95, max_lines: int = 4,
              glow_fill=None, glow_blur: float = 26.0, glow_gain: float = 1.0,
              shade: bool = True, width: int | None = None) -> "Stack":
         if not text:
@@ -105,7 +105,7 @@ class Stack:
         return self
 
     def rule(self, width: int = 420, *, fill=None, thickness: int = 2,
-             diamond: int = 8, delay: float | None = None, grow: float = 1.4,
+             diamond: int = 8, delay: float | None = None, grow: float = 1.1,
              pips: bool = True) -> "Stack":
         mask = orn.rule(width, thickness, diamond, pips=pips)
         layer = paint.tint(mask, fill or color("gold", 220))
@@ -121,7 +121,7 @@ class Stack:
         layer = paint.tint(mask, fill or color("gold", 190))
         self.pieces.append(Piece(layer=layer, dx=-mask.width // 2, dy=self._cursor,
                                  delay=self._delay if delay is None else delay,
-                                 rise=10.0, grow=1.3))
+                                 rise=10.0, grow=1.05))
         self._cursor += mask.height
         self._delay = (self._delay if delay is None else delay) + 0.24
         return self

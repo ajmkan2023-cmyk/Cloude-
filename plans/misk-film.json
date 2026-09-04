@@ -46,23 +46,27 @@
     "family": ""
   },
   "durations": {
-    "bismillah": 4.8,
-    "silk": 2.0,
-    "praise": 5.2,
-    "verse": 6.0,
-    "news": 5.2,
-    "petals": 2.0,
-    "name": 9.2,
-    "hadith": 5.6,
-    "hand": 4.6,
+    "bismillah": 4.2,
+    "silk": 1.8,
+    "praise": 4.6,
+    "verse": 5.4,
+    "news": 4.6,
+    "petals": 1.8,
+    "name": 8.4,
+    "hadith": 5.0,
+    "hand": 4.2,
     "crib": 4.8,
     "booties": 4.8,
-    "dua": 7.0,
-    "wall": 2.2,
-    "finale": 7.2
+    "dua": 6.4,
+    "wall": 1.8,
+    "finale": 6.4
   },
-  "crossfade": 0.9,
+  "crossfade": 0.6,
   "frame": true,
   "frame_alpha": 105,
-  "name_flash": 0.55
+  "name_flash": 0.55,
+  "omit": [
+    "crib",
+    "booties"
+  ]
 }
