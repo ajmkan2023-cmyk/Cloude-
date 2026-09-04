@@ -10,9 +10,10 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
+from functools import lru_cache
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageFilter
+from PIL import Image, ImageChops, ImageEnhance, ImageFilter
 
 from . import motion as M
 from . import ornament as orn
@@ -193,27 +194,45 @@ class Panel(Scene):
 
 # ── مشهد كشف الاسم ────────────────────────────────────────────────────
 class NameReveal(Scene):
-    """ذروة الفيديو: الإكليل يُرسم، والاسم يظهر ويمرّ عليه بريق ذهبي."""
+    """ذروة الفيديو: الإكليل يُرسم، والاسم يظهر ويمرّ عليه بريق ذهبي.
+
+    يعمل فوق ورق فارغ أو فوق لقطة داكنة — والثاني أقوى، لأن الذهب لا
+    يلمع إلا على خلفية داكنة.
+    """
 
     name = "name"
 
     def __init__(self, name_text: str, kicker: str = "", subtitle: str = "",
-                 latin: str = "", duration: float = 10.0):
+                 latin: str = "", duration: float = 10.0, *,
+                 image: str | Path | None = None, tone: str = "light",
+                 move: str = "in", zoom: float = 0.09,
+                 scrim_strength: float = 0.55):
         self.name_text = name_text
         self.kicker = kicker
         self.subtitle = subtitle
         self.latin = latin
         self.duration = duration
+        self.tone = tone if tone in TONE_INK else "light"
+        self.plate = Plate(image, zoom, move) if image else None
+        self.scrim_strength = scrim_strength
 
     def prepare(self) -> None:
-        style = fit(self.name_text, Style(**{**NAME.__dict__,
-                                             "max_width": VIDEO.content_width}), max_lines=1)
+        ink = TONE_INK[self.tone]
+        dark = self.tone == "dark"
+        if self.plate:
+            self.plate.prepare()
+            self._scrim = scrim("center", self.tone, self.scrim_strength)
+
+        style = fit(self.name_text,
+                    Style(**{**NAME.__dict__, "max_width": VIDEO.content_width}),
+                    max_lines=1)
         block = layout(self.name_text, style)
         line = block.lines[0]
         self.mask = line.mask
-        self.name_layer = _ink(self.mask, color("ink"), gold=True,
-                               glow_fill=color("gold_light", 120), glow_blur=42,
-                               glow_gain=1.15)
+        self.name_layer = _ink(
+            self.mask, ink["body"], gold=True,
+            glow_fill=color("gold_light", 150 if dark else 120),
+            glow_blur=48 if dark else 42, glow_gain=1.25 if dark else 1.15)
         self.name_dx = line.dx
         self.name_h = block.height
 
@@ -222,40 +241,42 @@ class NameReveal(Scene):
         self.sweep_sheet = paint.gradient(
             (w * 2, h),
             [(0.00, color("gold_light", 0)), (0.44, color("gold_light", 0)),
-             (0.50, (255, 250, 236, 235)), (0.56, color("gold_light", 0)),
+             (0.50, (255, 250, 236, 245)), (0.56, color("gold_light", 0)),
              (1.00, color("gold_light", 0))], angle=0)
 
         diameter = min(int(VIDEO.width * 0.86), int(VIDEO.height * 0.46))
         self.wreath_mask = orn.wreath(diameter, 3, 11)
-        self.wreath_layer = paint.tint(self.wreath_mask, color("gold", 165))
+        self.wreath_fill = color("gold_light", 185) if dark else color("gold", 165)
         self.diameter = diameter
 
         self.above = Stack(VIDEO.content_width)
         if self.kicker:
-            self.above.text(self.kicker, KICKER, color("gold_deep", 230), delay=0.15)
+            self.above.text(self.kicker, KICKER, ink["kicker"], delay=0.15)
 
         self.below = Stack(VIDEO.content_width)
         if self.subtitle:
-            self.below.rule(420, delay=2.5, thickness=2, diamond=8)
+            self.below.rule(420, delay=2.5, thickness=2, diamond=8, fill=ink["rule"])
             self.below.gap(38)
-            self.below.text(self.subtitle, SUBNAME, color("ink_soft"), delay=2.95,
-                            max_lines=1)
+            self.below.text(self.subtitle, SUBNAME, ink["soft"], delay=2.95, max_lines=1)
         if self.latin:
             self.below.gap(40)
-            self.below.text(self.latin, LATIN, color("ink_faint"), delay=3.4,
+            self.below.text(self.latin, LATIN, ink["faint"], delay=3.4,
                             max_lines=1, shade=False)
 
     def draw(self, base: Image.Image, t: float) -> Image.Image:
         cx, cy = VIDEO.width // 2, int(VIDEO.height * 0.5)
+        if self.plate:
+            base.paste(self.plate.view(t / max(0.1, self.duration)), (0, 0))
+            paint.stamp(base, self._scrim, (0, 0), M.ease_in_out_sine(M.clamp(t / 1.2)))
 
         # الإكليل يُرسم من الأعلى نزولًا
         grow = M.seg(t, 0.35, 2.4, M.ease_out_cubic)
         if grow > 0.01:
             revealed = orn.reveal_sweep(self.wreath_mask, grow, softness=110, direction="down")
-            paint.stamp_mask(base, revealed, color("gold", 165),
+            paint.stamp_mask(base, revealed, self.wreath_fill,
                              (cx - self.diameter // 2, cy - self.diameter // 2))
 
-        # الاسم: يظهر مع اتّساع طفيف
+        # الاسم: يظهر مع ارتفاع طفيف
         appear = M.seg(t, 0.95, 1.5, M.ease_out_quint)
         if appear > 0.01:
             mw, mh = self.mask.size
@@ -267,7 +288,7 @@ class NameReveal(Scene):
             # بريق يمرّ مرّة واحدة بعد استقرار الاسم
             sweep = M.seg(t, 2.15, 1.5, M.ease_in_out_sine)
             if 0.01 < sweep < 0.995:
-                offset = int((mw * 2 - mw) * sweep)
+                offset = int(mw * sweep)
                 band = self.sweep_sheet.crop((mw - offset, 0, 2 * mw - offset, mh))
                 shine = band.copy()
                 shine.putalpha(ImageChops.multiply(shine.getchannel("A"), self.mask))
@@ -346,4 +367,196 @@ class PhotoPanel(Scene):
 
         self.cap.draw(base, t, (VIDEO.width // 2,
                                 self.pos[1] + h + 40 + self.cap.height // 2))
+        return base
+
+
+# ── لوح الصورة: تدرّج لوني موحّد وحركة كِن بيرنز ──────────────────────
+_GRADE_LUT: dict[str, bytes] = {}
+
+
+def _channel_lut(gain: float, lift: float, gamma: float) -> list[int]:
+    xs = [i / 255 for i in range(256)]
+    out = []
+    for x in xs:
+        y = min(1.0, max(0.0, 0.5 + (x - 0.5) * gain)) ** gamma
+        y = y + lift * (1 - y)
+        out.append(int(round(min(1.0, max(0.0, y)) * 255)))
+    return out
+
+
+def grade(img: Image.Image) -> Image.Image:
+    """تدرّج لوني واحد يُطبَّق على كل الصور.
+
+    الصور المولّدة تتفاوت في الحرارة والتباين ولو جاءت من برومبت واحد،
+    فتبدو ألبومًا لا فيلمًا. هذا يرفع الظلال قليلًا نحو الدفء، ويخفض
+    التشبّع خفضًا طفيفًا، ويضيف انحناءة تباين لطيفة — فتتقارب كلّها.
+    """
+    if not _GRADE_LUT:
+        _GRADE_LUT["r"] = bytes(_channel_lut(1.055, 0.022, 0.99))
+        _GRADE_LUT["g"] = bytes(_channel_lut(1.055, 0.013, 1.00))
+        _GRADE_LUT["b"] = bytes(_channel_lut(1.055, 0.004, 1.02))
+    img = img.convert("RGB").point(
+        list(_GRADE_LUT["r"]) + list(_GRADE_LUT["g"]) + list(_GRADE_LUT["b"]))
+    return ImageEnhance.Color(img).enhance(0.93)
+
+
+MOVES = ("in", "out", "left", "right", "up", "down", "still")
+
+
+class Plate:
+    """صورة مُعدّة للحركة: تُكبَّر مرّة، ثم يُقتطع منها نافذة متحرّكة."""
+
+    def __init__(self, path: str | Path, zoom: float = 0.11, move: str = "in"):
+        self.path = Path(path)
+        self.zoom = zoom
+        self.move = move if move in MOVES else "in"
+        self.plate: Image.Image | None = None
+
+    def prepare(self) -> None:
+        w, h = VIDEO.width, VIDEO.height
+        pw, ph = int(w * (1 + self.zoom)), int(h * (1 + self.zoom))
+        src = grade(Image.open(self.path))
+        ratio = max(pw / src.width, ph / src.height)
+        src = src.resize((max(1, round(src.width * ratio)), max(1, round(src.height * ratio))),
+                         Image.LANCZOS)
+        left, top = (src.width - pw) // 2, (src.height - ph) // 2
+        self.plate = src.crop((left, top, left + pw, top + ph)).convert("RGBA")
+
+    def view(self, k: float) -> Image.Image:
+        """نافذة عند تقدّم ‎k∈[0,1]‎ من المشهد، بحجم الإطار."""
+        assert self.plate is not None
+        w, h = VIDEO.width, VIDEO.height
+        pw, ph = self.plate.size
+        k = M.clamp(k)
+
+        if self.move in ("in", "out", "still"):
+            span = self.zoom if self.move != "still" else self.zoom * 0.18
+            s = (1 + span) - span * k if self.move == "in" else 1 + span * k
+            if self.move == "still":
+                s = 1 + span * (1 - k)
+            cw, ch = min(pw, int(w * s)), min(ph, int(h * s))
+            x, y = (pw - cw) // 2, (ph - ch) // 2
+        else:
+            s = 1 + self.zoom * 0.30
+            cw, ch = min(pw, int(w * s)), min(ph, int(h * s))
+            slack_x, slack_y = pw - cw, ph - ch
+            u = M.ease_in_out_sine(k)
+            x, y = slack_x // 2, slack_y // 2
+            if self.move == "left":
+                x = int(slack_x * (1 - u))
+            elif self.move == "right":
+                x = int(slack_x * u)
+            elif self.move == "up":
+                y = int(slack_y * (1 - u))
+            elif self.move == "down":
+                y = int(slack_y * u)
+
+        window = self.plate.crop((x, y, x + cw, y + ch))
+        return window if (cw, ch) == (w, h) else window.resize((w, h), Image.BICUBIC)
+
+
+# ── حجاب يضمن قراءة النصّ فوق الصورة ──────────────────────────────────
+ZONES: dict[str, tuple[float, float]] = {
+    "top":        (0.50, 0.24),
+    "upper":      (0.50, 0.32),
+    "center":     (0.50, 0.47),
+    "lower":      (0.50, 0.66),
+    "bottom":     (0.50, 0.76),
+    "left":       (0.34, 0.47),
+    "right":      (0.66, 0.47),
+    "left-lower": (0.35, 0.58),
+    "left-upper": (0.35, 0.41),
+}
+
+
+@lru_cache(maxsize=32)
+def scrim(zone: str, tone: str, strength: float) -> Image.Image:
+    """طبقة تهيّئ منطقة النصّ للقراءة دون أن تُرى.
+
+    على الصور الفاتحة ترفع المنطقة نحو البياض ليقوى الحبر الداكن، وعلى
+    الداكنة تعمّقها ليقوى الحبر العاجي. تتلاشى بعيدًا عن النصّ فلا تظهر
+    كمستطيل ملصوق.
+    """
+    if strength <= 0.01:
+        return paint.blank(VIDEO.size)
+    fx, fy = ZONES.get(zone, ZONES["center"])
+    w, h = VIDEO.size
+    tint_rgb = (250, 245, 236) if tone == "light" else (16, 11, 9)
+    peak = int(190 * strength)
+
+    if zone in ("left", "right", "left-lower"):
+        near, far = (0.0, 1.0) if fx < 0.5 else (1.0, 0.0)
+        layer = paint.gradient(VIDEO.size, [
+            (0.00, (*tint_rgb, peak if near == 0.0 else 0)),
+            (0.52, (*tint_rgb, int(peak * 0.30))),
+            (1.00, (*tint_rgb, 0 if near == 0.0 else peak)),
+        ], angle=0)
+        if zone in ("left-lower", "left-upper"):
+            layer.alpha_composite(paint.radial(
+                VIDEO.size, (w * fx, h * fy), h * 0.46,
+                (*tint_rgb, int(peak * 0.5)), (*tint_rgb, 0), 1.5))
+        return layer
+
+    if zone == "center":
+        return paint.radial(VIDEO.size, (w * fx, h * fy), h * 0.44,
+                            (*tint_rgb, peak), (*tint_rgb, 0), 1.35)
+
+    top_heavy = fy < 0.5
+    stops = ([(0.00, (*tint_rgb, peak)), (0.30, (*tint_rgb, int(peak * 0.72))),
+              (0.62, (*tint_rgb, 0)), (1.00, (*tint_rgb, 0))] if top_heavy else
+             [(0.00, (*tint_rgb, 0)), (0.38, (*tint_rgb, 0)),
+              (0.70, (*tint_rgb, int(peak * 0.72))), (1.00, (*tint_rgb, peak))])
+    return paint.gradient(VIDEO.size, stops, angle=90)
+
+
+# ألوان النصّ حسب مزاج اللقطة
+TONE_INK = {
+    "light": {"body": color("ink"), "soft": color("ink_soft"), "faint": color("ink_faint"),
+              "kicker": color("gold_deep", 240), "rule": color("gold", 215),
+              "accent": color("rose_deep", 240)},
+    "dark": {"body": color("cream"), "soft": color("cream_soft"), "faint": color("cream_dim"),
+             "kicker": color("gold_light", 245), "rule": color("gold_light", 215),
+             "accent": color("rose", 240)},
+}
+
+
+class ImagePanel(Scene):
+    """لقطة مصوّرة تملأ الإطار، ونصّ يجلس في المنطقة الفارغة منها."""
+
+    def __init__(self, image: str | Path, build=None, *, duration: float = 6.0,
+                 tone: str = "light", zone: str = "center", move: str = "in",
+                 scrim_strength: float = 0.55, zoom: float = 0.11,
+                 name: str = "panel", text_width: float = 0.80,
+                 delay: float = 0.0):
+        self.plate = Plate(image, zoom, move)
+        self.build = build
+        self.duration = duration
+        self.tone = tone if tone in TONE_INK else "light"
+        self.zone = zone
+        self.scrim_strength = scrim_strength
+        self.name = name
+        self.text_width = text_width
+        self.delay = delay
+
+    def prepare(self) -> None:
+        self.plate.prepare()
+        self._scrim = scrim(self.zone, self.tone, self.scrim_strength) if self.build else None
+        self.stack = None
+        if self.build:
+            self.stack = Stack(int(VIDEO.width * self.text_width))
+            self.build(self.stack, TONE_INK[self.tone])
+        fx, fy = ZONES.get(self.zone, ZONES["center"])
+        self.center = (int(VIDEO.width * fx), int(VIDEO.height * fy))
+
+    def draw(self, base: Image.Image, t: float) -> Image.Image:
+        base.paste(self.plate.view(t / max(0.1, self.duration)), (0, 0))
+        if self.stack is None:
+            return base
+        appear = M.ease_in_out_sine(M.clamp((t - self.delay) / 1.1))
+        tail = M.clamp((t - (self.duration - 0.9)) / 0.9)
+        veil = appear * (1 - 0.25 * M.ease_in_out_sine(tail))
+        paint.stamp(base, self._scrim, (0, 0), veil)
+        lift = -16 * M.ease_in_out_sine(tail)
+        self.stack.draw(base, t - self.delay,
+                        (self.center[0], int(self.center[1] + lift)))
         return base

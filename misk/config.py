@@ -33,6 +33,9 @@ _HEX = {
     "rose":       "#D9A9A2",   # وردي خافت
     "rose_deep":  "#B87F79",
     "sage":       "#A6B29C",   # لمسة خضراء للأوراق
+    "cream":      "#F6EDDF",   # حبر النصّ فوق اللقطات الداكنة
+    "cream_soft": "#DCCEB9",
+    "cream_dim":  "#AC9C87",
 }
 PALETTE: dict[str, tuple[int, int, int]] = {k: _rgb(v) for k, v in _HEX.items()}
 

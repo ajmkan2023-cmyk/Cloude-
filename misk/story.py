@@ -22,6 +22,8 @@ DEFAULT_DURATIONS = {
 
 def load(path: str | Path) -> dict:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if data.get("mode") == "film":
+        return data
     data.setdefault("durations", {})
     for key, value in DEFAULT_DURATIONS.items():
         data["durations"].setdefault(key, value)
@@ -156,6 +158,9 @@ def build_scenes(plan: dict) -> list:
 
 
 def build_timeline(plan: dict) -> Timeline:
+    if plan.get("mode") == "film":
+        from . import film
+        return film.build_timeline(plan)
     return Timeline(
         build_scenes(plan),
         crossfade=plan.get("crossfade", 1.1),
@@ -166,6 +171,9 @@ def build_timeline(plan: dict) -> Timeline:
 
 def outline(plan: dict) -> str:
     """جدول المشاهد ومواقيتها — للمراجعة قبل الإخراج."""
+    if plan.get("mode") == "film":
+        from . import film
+        return film.outline(plan)
     tl = build_timeline(plan)
     rows = [f"{'المشهد':<12}{'يبدأ':>9}{'ينتهي':>9}{'المدّة':>9}"]
     for cue in tl.cues:
