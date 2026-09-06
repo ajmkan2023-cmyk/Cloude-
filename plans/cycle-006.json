@@ -1,0 +1,97 @@
+{
+  "cycle": 6,
+  "concept": "family",
+  "topic": "اللمّة",
+  "headline": "مساحة تكفي\nلمّتكم كلها",
+  "kicker": "مكان يجمعكم",
+  "subline": "طاولة مجهّزة وصالة مفتوحة",
+  "cta": "احجز شاليهك الآن",
+  "pattern": "mosaic",
+  "text_cards": [],
+  "style": "editorial",
+  "design": {
+    "caption": "band",
+    "title_layout": "center",
+    "number": "none",
+    "accent": "sun",
+    "outro_bg": "photo",
+    "progress": "dots",
+    "watermark": "none",
+    "transition": "zoom",
+    "transition_seconds": 0.5,
+    "grade": 1.1,
+    "title_size": 104,
+    "caption_title_size": 60,
+    "body_size": 37,
+    "radius": 14,
+    "scrim_photo": [
+      100,
+      30,
+      215
+    ],
+    "scrim_title": [
+      185,
+      75,
+      225
+    ]
+  },
+  "design_note": "الفكرة سعة المكان لا تفصيله، فاخترت «الفسيفساء»: شبكتان تعرضان أربع لقطات معًا فيُدرك المشاهد الاتّساع في لمحة بدل أن يعدّه غرفة غرفة. شريط سفلي بعرض الشاشة بدل اللوحات الصغيرة ليتناسب مع الشبكات، وحوافّ شبه حادّة، وبلا علامة مائية ليبقى الإطار للصور.",
+  "shots": [
+    {
+      "photo": "assets/incoming/drive/DSC02198.JPG",
+      "title": "مساحات مفتوحة",
+      "body": "صالة ومطبخ وطاولة في مدى واحد"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03161 (1).jpg",
+      "title": "فاصل مزخرف",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02175.JPG",
+      "title": "مطبخ بجزيرة",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03290 (1).jpg",
+      "title": "كنب أمام النافذة",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02197.JPG",
+      "title": "جلسة برّا تكفي الجميع",
+      "body": "كنب ومقاعد تحت النخيل"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02194.JPG",
+      "title": "حوض السباحة",
+      "body": "ماء صافٍ وواجهة زجاجية خلفه"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03153.jpg",
+      "title": "غرف تكفي الجميع",
+      "body": "نوم هادئ ونوافذ على الماء"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02222.JPG",
+      "title": "شرفة من الغرفة",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02212.JPG",
+      "title": "إضاءة دافئة",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02186.JPG",
+      "title": "رخام ومرايا",
+      "body": ""
+    }
+  ],
+  "caption": "مكان يجمع اللمّة كلها على بحر الخبر 🌴\nصالة ومطبخ وطاولة في مدى واحد، جلسة خارجية تحت النخيل، مسبح، وغرف تكفي الجميع.\n\nجهّزوا الموعد وخلّوا الباقي علينا.\nللحجز والاستفسار: 0535516054",
+  "hashtags": "",
+  "hero_photo": "assets/incoming/drive/DSC03520.jpg",
+  "audio": "",
+  "music_mood": "warm",
+  "created": "2026-09-06"
+}
