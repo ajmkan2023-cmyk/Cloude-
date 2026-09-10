@@ -595,5 +595,83 @@
     "time": "نهار",
     "quality": "جيدة",
     "vertical_ok": true
+  },
+  "DSC02172.JPG": {
+    "path": "assets/incoming/drive/DSC02172.JPG",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "إطلالة",
+      "بحر",
+      "نخيل"
+    ],
+    "description": "مساحة داخلية واسعة تجمع طاولة الطعام والجلوس مع فاصل خشبي ودرج، ونوافذ تطلّ على النخيل والماء",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02177.JPG": {
+    "path": "assets/incoming/drive/DSC02177.JPG",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "مبنى"
+    ],
+    "description": "صالة بكنب زاوية كبير وطاولات دائرية وفاصل خشبي مزخرف ودرج داخلي",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02180.JPG": {
+    "path": "assets/incoming/drive/DSC02180.JPG",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "مطبخ",
+      "إطلالة",
+      "بحر"
+    ],
+    "description": "صالة بتلفزيون وفاصل مزخرف والمطبخ خلفها، ونافذة عريضة على الماء",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02200.JPG": {
+    "path": "assets/incoming/drive/DSC02200.JPG",
+    "tags": [
+      "صالة",
+      "جلسة",
+      "مبنى"
+    ],
+    "description": "درج بدرابزين ستيل وجدار رخامي مضاء ومقاعد بجانبه",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02205.JPG": {
+    "path": "assets/incoming/drive/DSC02205.JPG",
+    "tags": [
+      "غرفة"
+    ],
+    "description": "غرفة نوم بطاولة زينة ومرآة بيضاوية وخزانة خشبية",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
+  },
+  "DSC02209.JPG": {
+    "path": "assets/incoming/drive/DSC02209.JPG",
+    "tags": [
+      "حمام"
+    ],
+    "description": "حمّام رخامي بمرآة بيضاوية مضاءة ومغسلة ونبتة خضراء وقاطع زجاجي",
+    "people": false,
+    "time": "نهار",
+    "quality": "جيدة",
+    "vertical_ok": true
   }
 }

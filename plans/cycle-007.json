@@ -1,0 +1,107 @@
+{
+  "cycle": 7,
+  "concept": "tour",
+  "topic": "أجمكان",
+  "headline": "كل المكان\nفي ٢٠ ثانية",
+  "kicker": "تعال شوف",
+  "subline": "صالة وطاولة وفاصل مزخرف",
+  "cta": "إجازتك تبدأ من هنا",
+  "pattern": "hook",
+  "text_cards": [],
+  "style": "editorial",
+  "design": {
+    "caption": "corner",
+    "title_layout": "bottom",
+    "number": "chip",
+    "accent": "sky",
+    "outro_bg": "brand",
+    "progress": "bar",
+    "watermark": "top_right",
+    "transition": "fade",
+    "transition_seconds": 0.35,
+    "grade": 1.0,
+    "title_size": 98,
+    "caption_title_size": 56,
+    "body_size": 36,
+    "radius": 36,
+    "scrim_photo": [
+      130,
+      45,
+      195
+    ],
+    "scrim_title": [
+      170,
+      60,
+      240
+    ]
+  },
+  "design_note": "«الخطّاف» آخر نمط لم يُستخدم: خمس لقطات خاطفة تعرض المكان كله في ثانيتين، ثم يهدأ الإيقاع إلى ثلاث مساحات مرقّمة، وينتهي بشبكة تفاصيل. وضعت نص اللقطة في أعلى الشاشة (corner) لأن الصور الداخلية موضوعها في النصف السفلي — فينقلب التكوين ولا يغطّي النص ما يهمّ.",
+  "shots": [
+    {
+      "photo": "assets/incoming/drive/DSC02177.JPG",
+      "title": "شوف كل شي",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02200.JPG",
+      "title": "درج ورخام",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02199.JPG",
+      "title": "مطبخ وطاولة",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02209.JPG",
+      "title": "مرايا وإضاءة",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02205.JPG",
+      "title": "خزانة وزينة",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02180.JPG",
+      "title": "فاصل يقسم الصالة",
+      "body": "تلفزيون معلّق وإضاءة هادئة"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC03171 (1).jpg",
+      "title": "نافذة بحجم الجدار",
+      "body": "سرير والبحر خلف الزجاج"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02190.JPG",
+      "title": "المسبح والبحر",
+      "body": "حوض والبحر خلفه مباشرة"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02210.JPG",
+      "title": "وتفاصيل ما تنتبه لها",
+      "body": "حمّامات ومساحات مجهّزة"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02213.JPG",
+      "title": "خزانة ونوافذ",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02195.JPG",
+      "title": "جلسة خارجية",
+      "body": ""
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02192.JPG",
+      "title": "مسبح ملاصق",
+      "body": ""
+    }
+  ],
+  "caption": "جولة كاملة في أجمكان قبل ما تقرّر 🏝\nصالة وطاولة ونوافذ على الماء، غرف بإطلالة، ومسبح والبحر خلفه مباشرة — على بحر الخبر.\n\nقول لنا التاريخ وإحنا نجهّز الباقي.\nللحجز والاستفسار: 0535516054",
+  "hashtags": "",
+  "hero_photo": "assets/incoming/drive/DSC02172.JPG",
+  "audio": "",
+  "music_mood": "cinematic",
+  "created": "2026-09-10"
+}
