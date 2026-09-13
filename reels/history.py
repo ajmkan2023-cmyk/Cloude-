@@ -60,6 +60,16 @@ class History:
     def previous(self, cycle: int) -> list[dict]:
         return [c for c in self.cycles if c.get("cycle") != cycle]
 
+    @staticmethod
+    def by_date(cycles: list[dict]) -> list[dict]:
+        """يرتّب بتاريخ الإنشاء لا برقم الدورة.
+
+        حلقات المناسبات تأخذ أرقامًا عالية (٩٠١ لليوم الوطني) كي لا تصطدم
+        بترقيم الدورات، فلو رتّبنا بالرقم لبقيت إلى الأبد داخل نافذة «آخر
+        ثلاث دورات» وحجبت ثلث ذاكرة التكرار. التاريخ هو المعيار الصحيح.
+        """
+        return sorted(cycles, key=lambda c: (c.get("created") or "", c.get("cycle", 0)))
+
     # ------------------------------------------------------------------
     def echoes(self, plan) -> list[str]:
         """يعيد كل ما يتكرّر في هذه الحلقة مقارنةً بالسجلّ."""
@@ -88,8 +98,8 @@ class History:
                             f"عنوان اللقطة «{shot.title}» يشبه «{old_title}» من الحلقة {n}"
                         )
 
-        # الفكرة نفسها في آخر ثلاث دورات
-        recent = sorted(past, key=lambda c: c.get("cycle", 0))[-3:]
+        # الفكرة نفسها في آخر ثلاث دورات (بالتاريخ لا بالرقم)
+        recent = self.by_date(past)[-3:]
         if any(c.get("concept") == plan.concept for c in recent):
             found.append(f"الفكرة «{plan.concept}» استُخدمت في آخر ٣ دورات")
         if plan.music_mood and any(c.get("music_mood") == plan.music_mood for c in recent):
@@ -104,7 +114,7 @@ class History:
     def _design_echoes(self, plan, past: list[dict]) -> list[str]:
         current = self._design_signature(plan)
         out = []
-        for old in sorted(past, key=lambda c: c.get("cycle", 0))[-4:]:
+        for old in self.by_date(past)[-4:]:
             old_design = old.get("design", {})
             if not old_design:
                 continue

@@ -290,6 +290,42 @@
       "created": "2026-09-10"
     },
     {
+      "cycle": 8,
+      "concept": "evening",
+      "topic": "أجمكان",
+      "headline": "المساء هنا\nله طعم ثاني",
+      "caption_opener": "حين تهدأ الشمس، يبدأ أجمل وقت في أجمكان 🌙",
+      "shot_titles": [
+        "ممرّ مضاء بين المباني",
+        "الماء ساكن",
+        "سرير بإضاءة هادئة",
+        "جدار يشعّ بهدوء",
+        "الواجهة والنخيل"
+      ],
+      "photos": [
+        "DSC03276.jpg",
+        "DSC02193.JPG",
+        "DSC02217.JPG",
+        "DSC02200.JPG",
+        "DSC02196.JPG",
+        "DSC03270.jpg"
+      ],
+      "design": {
+        "caption": "bare",
+        "title_layout": "center",
+        "number": "big",
+        "accent": "sand",
+        "outro_bg": "photo",
+        "progress": "none",
+        "watermark": "top_left",
+        "transition": "slide"
+      },
+      "pattern": "classic",
+      "music_mood": "night",
+      "design_note": "أهدأ حلقة حتى الآن: أزلت كل لوحة عن الإطار (bare) فلا يبقى إلا خيط رملي رفيع بجوار النص، والصور الليلية تُترك تتنفّس بتدرّج منخفض وتعتيم خفيف. الرقم الضخم الشبحي يعوّض غياب اللوحات، والانتقال انزلاقي بطيء ٠٫٦ ثانية يناسب إيقاع المساء.",
+      "created": "2026-09-13"
+    },
+    {
       "cycle": 901,
       "concept": "national_day",
       "topic": "٩٦",

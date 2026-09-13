@@ -153,6 +153,26 @@ CONCEPTS: tuple[Concept, ...] = (
         topic_hint="أجمكان",
     ),
     Concept(
+        key="evening",
+        name_ar="المساء",
+        kicker="حين يهدأ اليوم",
+        headline_template="المساء في {topic}\nله طعم ثاني",
+        scene_count=5,
+        title_scene_seconds=3.4,
+        photo_scene_seconds=3.6,
+        outro_seconds=3.6,
+        moves=("zoom_out", "rise", "pan_left", "zoom_in", "pan_right"),
+        caption_opener="حين تهدأ الشمس، يبدأ أجمل وقت في أجمكان 🌙",
+        hashtags=BASE_TAGS + ("مساء", "هدوء", "إضاءة"),
+        guidance=(
+            "نبرة هادئة بطيئة. اكتب عن الضوء والسكون لا عن الخدمات. "
+            "⚠ لا تصف صورة نهارية بأنها ليلية: تحقّق أن الصورة موسومة "
+            "«ليل» قبل أي ذكر للمساء أو النجوم أو الإضاءة الليلية، وإلا "
+            "فاكتفِ بوصف ما يظهر فعلًا."
+        ),
+        topic_hint="أجمكان",
+    ),
+    Concept(
         key="invitation",
         name_ar="الدعوة",
         kicker="إجازتك القادمة",

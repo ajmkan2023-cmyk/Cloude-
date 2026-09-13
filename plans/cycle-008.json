@@ -1,0 +1,72 @@
+{
+  "cycle": 8,
+  "concept": "evening",
+  "topic": "أجمكان",
+  "headline": "المساء هنا\nله طعم ثاني",
+  "kicker": "حين يهدأ اليوم",
+  "subline": "مسبح مضاء عند الواجهة",
+  "cta": "احجز ليلتك عندنا",
+  "pattern": "classic",
+  "text_cards": [],
+  "style": "editorial",
+  "design": {
+    "caption": "bare",
+    "title_layout": "center",
+    "number": "big",
+    "accent": "sand",
+    "outro_bg": "photo",
+    "progress": "none",
+    "watermark": "top_left",
+    "transition": "slide",
+    "transition_seconds": 0.6,
+    "grade": 0.85,
+    "title_size": 100,
+    "caption_title_size": 58,
+    "body_size": 36,
+    "radius": 0,
+    "scrim_photo": [
+      80,
+      25,
+      190
+    ],
+    "scrim_title": [
+      160,
+      55,
+      235
+    ]
+  },
+  "design_note": "أهدأ حلقة حتى الآن: أزلت كل لوحة عن الإطار (bare) فلا يبقى إلا خيط رملي رفيع بجوار النص، والصور الليلية تُترك تتنفّس بتدرّج منخفض وتعتيم خفيف. الرقم الضخم الشبحي يعوّض غياب اللوحات، والانتقال انزلاقي بطيء ٠٫٦ ثانية يناسب إيقاع المساء.",
+  "shots": [
+    {
+      "photo": "assets/incoming/drive/DSC03276.jpg",
+      "title": "ممرّ مضاء بين المباني",
+      "body": "الهدوء يبدأ من المدخل"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02193.JPG",
+      "title": "الماء ساكن",
+      "body": "مسبح ملاصق للواجهة"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02217.JPG",
+      "title": "سرير بإضاءة هادئة",
+      "body": "نوم يستحقّه اليوم"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02200.JPG",
+      "title": "جدار يشعّ بهدوء",
+      "body": "تفاصيل تلفت النظر"
+    },
+    {
+      "photo": "assets/incoming/drive/DSC02196.JPG",
+      "title": "الواجهة والنخيل",
+      "body": "نخيل حول المبنى"
+    }
+  ],
+  "caption": "حين تهدأ الشمس، يبدأ أجمل وقت في أجمكان 🌙\nمسبح مضاء عند الواجهة، ممرّات هادية، وغرف ضوؤها دافئ — على بحر الخبر.\n\nليلة وحدة تكفي تفرّق.\nللحجز والاستفسار: 0535516054",
+  "hashtags": "",
+  "hero_photo": "assets/incoming/drive/DSC03270.jpg",
+  "audio": "",
+  "music_mood": "night",
+  "created": "2026-09-13"
+}
